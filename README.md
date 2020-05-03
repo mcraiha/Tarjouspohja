@@ -1,0 +1,2 @@
+# Tarjouspohja
+ Tarjousviestien generointi
