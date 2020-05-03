@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel="icon" href="favicon.ico">
+    <link rel="stylesheet" href="mvp.css">
+    <title>Tarjouspohja - Ilmainen, avoin, mainosvapaa ja yksityisyyttä kunnioittava hintatarjouspohjan generoija</title>
+  </head>
+  <body>
+    <noscript>
+      <strong>Tarjouspohja vaatii Javascriptin toimiakseen</strong>
+    </noscript>
+    <h1>Hintatarjouspohjan generoija</h1>
+    <form>
+        <label>Tarjouksen URL/osoite:</label><br>
+        <input type="url" id="tarjousosoite" placeholder="https://jokukauppa.com/tuote" disabled>
+        
+        <label>Tarjoustuote:</label><br>
+        <input type="text" id="tarjoustuote" disabled>
+        
+        <label>Tarjoushinta:</label><br>
+        <input type="number" id="tarjoushinta" disabled>
+
+        <label>BB Code:</label><br>
+        <input type="text" id="bbkoodi" name="country" value="BB Code generoituu tähän" readonly><br>
+    </form>
+  </body>
+  <script type="module" src="index.js"></script>
+</html>
