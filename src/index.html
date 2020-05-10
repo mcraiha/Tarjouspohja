@@ -15,16 +15,32 @@
     <h1>Hintatarjouspohjan generoija</h1>
     <form>
         <label>Tarjouksen URL/osoite:</label><br>
-        <input type="url" id="tarjousosoite" placeholder="https://jokukauppa.com/tuote" disabled>
+        <input type="url" id="tarjousosoite" placeholder="https://jokukauppa.com/tuote" disabled><br><br>
         
         <label>Tarjoustuote:</label><br>
-        <input type="text" id="tarjoustuote" disabled>
+        <input type="text" id="tarjoustuote" placeholder="Peltisakset" disabled><br><br>
         
         <label>Tarjoushinta:</label><br>
-        <input type="number" id="tarjoushinta" disabled>
+        <input type="number" id="tarjoushinta" placeholder="14,99" disabled><br>
+
+        <input type="radio" name="valuutta" value="euro">
+        <label for="euro">euroa</label><br>
+        <input type="radio" name="valuutta" value="dollari">
+        <label for="dollari">dollaria</label><br>
+        <input type="radio" name="valuutta" value="muu">
+        <input type="text" id="omavaluutta">
+        <br><br>
+
+        <label>Voimassa:</label><br>
+        <input type="radio" name="voimassa" value="tanaan">
+        <label for="tanaan">tänään</label><br>
+        <input type="radio" name="voimassa" value="huomiseen">
+        <label for="huomiseen">huomenna</label><br>
+        <input type="radio" name="voimassa" value="muu">
+        <input type="date" id="alkupaiva"> - <input type="date" id="loppupaiva"><br><br>
 
         <label>BB Code:</label><br>
-        <input type="text" id="bbkoodi" name="country" value="BB Code generoituu tähän" readonly><br>
+        <textarea rows="5" id="bbkoodi" readonly>BB Code generoituu tähän</textarea><br>
     </form>
   </body>
   <script type="module" src="index.js"></script>
