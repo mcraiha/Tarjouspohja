@@ -29,6 +29,11 @@ laitaRadiotPaalle('valuutta');
 
 laitaRadiotPaalle('voimassa');
 
+const kopioibbNappi: HTMLElement = document.getElementById('kopioibb')!;
+if (kopioibbNappi) {
+    const kopioibbInput = <HTMLInputElement>kopioibbNappi;
+    kopioibbInput.onclick = kopioiBB;
+}
 
 // Alustus päättyy
 
@@ -38,6 +43,13 @@ export function tarkistaUrl(event: Event): void {
         generoi();
     }
        
+}
+
+export function kopioiBB(): void {
+    const bbKoodi: HTMLElement = document.getElementById('bbkoodi')!;
+    const bbKoodiInput = <HTMLInputElement>bbKoodi;
+    bbKoodiInput.select();
+    document.execCommand("copy");
 }
 
 export function tunnistaKauppa(osoite: string): Verkkokauppa {
@@ -68,6 +80,10 @@ export function generoi(): void {
     const bbKoodi: HTMLElement = document.getElementById('bbkoodi')!;
     const bbKoodiInput = <HTMLInputElement>bbKoodi;
     bbKoodiInput.value = generoiBBCode(tarjoustuoteInput.value, tarjousosoiteInput.value, Verkkokauppa[kauppa], '', '' );
+
+    const kopioibbNappi: HTMLElement = document.getElementById('kopioibb')!;
+    const kopioibbInput = <HTMLInputElement>kopioibbNappi;
+    kopioibbInput.disabled = false;
 
     const visuaalinen: HTMLElement = document.getElementById('visuaalinen')!;
     visuaalinen.innerHTML = generoiVisuaalinen(tarjoustuoteInput.value, tarjousosoiteInput.value, Verkkokauppa[kauppa], '', '' );
