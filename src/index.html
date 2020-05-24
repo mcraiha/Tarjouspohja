@@ -34,13 +34,24 @@
         <label>Voimassa:</label><br>
         <input type="radio" name="voimassa" value="tanaan" disabled>
         <label for="tanaan">tänään</label><br>
+
         <input type="radio" name="voimassa" value="huomiseen" disabled>
         <label for="huomiseen">huomenna</label><br>
+
+        <input type="radio" name="voimassa" value="eitietoa" disabled>
+        <label for="eitietoa">ei tietoa</label><br>
+
+        <input type="radio" name="voimassa" value="asti" disabled>
+        <input type="date" id="asti"> asti<br>
+
         <input type="radio" name="voimassa" value="muu" disabled>
         <input type="date" id="alkupaiva"> - <input type="date" id="loppupaiva"><br><br>
 
         <label>BB Code:</label><br>
-        <textarea rows="5" id="bbkoodi" readonly>BB Code generoituu tähän</textarea><br>
+        <textarea rows="8" cols="60" id="bbkoodi" readonly>BB Code generoituu tähän</textarea><br><br>
+
+        <label>Visuaalinen:</label><br>
+        <div id="visuaalinen">Teksti generoituu tähän</div>
     </form>
   </body>
   <script type="module" src="index.js"></script>

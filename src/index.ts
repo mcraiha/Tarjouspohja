@@ -34,7 +34,8 @@ laitaRadiotPaalle('voimassa');
 
 export function tarkistaUrl(event: Event): void {
     if ((<HTMLInputElement>event.target).value) {
-        console.log((<HTMLInputElement>event.target).value); 
+        console.log((<HTMLInputElement>event.target).value);
+        generoi();
     }
        
 }
@@ -51,12 +52,42 @@ export function tunnistaKauppa(osoite: string): Verkkokauppa {
     return Verkkokauppa.Tunnistamaton;
 }
 
+export function generoi(): void {
+    const tarjousosoite: HTMLElement = document.getElementById('tarjousosoite')!;
+    const tarjousosoiteInput = <HTMLInputElement>tarjousosoite;
+
+    if (tarjousosoiteInput.value === null) {
+        return;
+    }
+
+    const kauppa: Verkkokauppa = tunnistaKauppa(tarjousosoiteInput.value);
+
+    const tarjoustuote: HTMLElement = document.getElementById('tarjoustuote')!;
+    const tarjoustuoteInput = <HTMLInputElement>tarjoustuote;
+
+    const bbKoodi: HTMLElement = document.getElementById('bbkoodi')!;
+    const bbKoodiInput = <HTMLInputElement>bbKoodi;
+    bbKoodiInput.value = generoiBBCode(tarjoustuoteInput.value, tarjousosoiteInput.value, Verkkokauppa[kauppa], '', '' );
+
+    const visuaalinen: HTMLElement = document.getElementById('visuaalinen')!;
+    visuaalinen.innerHTML = generoiVisuaalinen(tarjoustuoteInput.value, tarjousosoiteInput.value, Verkkokauppa[kauppa], '', '' );
+}
+
 export function generoiBBCode(tuote: string, osoite: string, kauppa: string, voimassa: string, hinta: string): string {
     return `[b]Tuote:[/b] ${tuote}
     [b]Hinta:[/b] ${hinta}
     [b]Kauppa:[/b] ${kauppa}
     [b]Voimassa:[/b] ${voimassa}
     [b]Linkki:[/b] ${osoite}
+    `;
+}
+
+export function generoiVisuaalinen(tuote: string, osoite: string, kauppa: string, voimassa: string, hinta: string): string {
+    return `<b>Tuote:</b> ${tuote} <br>
+    <b>Hinta:</b> ${hinta} <br>
+    <b>Kauppa:</b> ${kauppa} <br>
+    <b>Voimassa:</b> ${voimassa} <br>
+    <b>Linkki:</b> <a href="${osoite}">${osoite}</a>
     `;
 }
 
