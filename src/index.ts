@@ -80,6 +80,16 @@ export function tunnistaKauppa(osoite: string): Verkkokauppa {
     return Verkkokauppa.Tunnistamaton;
 }
 
+export function etsiKaupanNimi(verkkokauppa: Verkkokauppa): string {
+    for (const kauppa of kaupat) {
+        if (kauppa.kauppa === verkkokauppa) {
+            return kauppa.nimi;
+        }
+    }
+
+    return "";
+}
+
 export function generoi(): void {
     const tarjousosoite: HTMLElement = document.getElementById('tarjousosoite')!;
     const tarjousosoiteInput = <HTMLInputElement>tarjousosoite;
@@ -89,20 +99,21 @@ export function generoi(): void {
     }
 
     const kauppa: Verkkokauppa = tunnistaKauppa(tarjousosoiteInput.value);
+    const kaupanNimi: string = etsiKaupanNimi(kauppa);
 
     const tarjoustuote: HTMLElement = document.getElementById('tarjoustuote')!;
     const tarjoustuoteInput = <HTMLInputElement>tarjoustuote;
 
     const bbKoodi: HTMLElement = document.getElementById('bbkoodi')!;
     const bbKoodiInput = <HTMLInputElement>bbKoodi;
-    bbKoodiInput.value = generoiBBCode(tarjoustuoteInput.value, tarjousosoiteInput.value, Verkkokauppa[kauppa], '', '' );
+    bbKoodiInput.value = generoiBBCode(tarjoustuoteInput.value, tarjousosoiteInput.value, kaupanNimi, '', '' );
 
     const kopioibbNappi: HTMLElement = document.getElementById('kopioibb')!;
     const kopioibbInput = <HTMLInputElement>kopioibbNappi;
     kopioibbInput.disabled = false;
 
     const visuaalinen: HTMLElement = document.getElementById('visuaalinen')!;
-    visuaalinen.innerHTML = generoiVisuaalinen(tarjoustuoteInput.value, tarjousosoiteInput.value, Verkkokauppa[kauppa], '', '' );
+    visuaalinen.innerHTML = generoiVisuaalinen(tarjoustuoteInput.value, tarjousosoiteInput.value, kaupanNimi, '', '' );
 }
 
 export function generoiBBCode(tuote: string, osoite: string, kauppa: string, voimassa: string, hinta: string): string {
