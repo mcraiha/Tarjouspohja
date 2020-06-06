@@ -37,6 +37,7 @@ const tarjoushinta: HTMLElement = document.getElementById('tarjoushinta')!;
 if (tarjoushinta) {
     const tarjoushintaInput = <HTMLInputElement>tarjoushinta;
     tarjoushintaInput.disabled = false;
+    tarjoushinta.addEventListener('input', paivitaJosUrlAnnettu);
 }
 
 laitaRadiotPaalle('valuutta');
@@ -57,6 +58,12 @@ export function tarkistaUrl(event: Event): void {
         generoi();
     }
        
+}
+
+export function paivitaJosUrlAnnettu(event: Event): void {
+    if (onkoTarjousOsoitteessaJotain()) {
+        generoi();
+    }
 }
 
 export function kopioiBB(): void {
@@ -90,13 +97,26 @@ export function etsiKaupanNimi(verkkokauppa: Verkkokauppa): string {
     return "";
 }
 
-export function generoi(): void {
+export function onkoTarjousOsoitteessaJotain(): boolean {
     const tarjousosoite: HTMLElement = document.getElementById('tarjousosoite')!;
     const tarjousosoiteInput = <HTMLInputElement>tarjousosoite;
 
-    if (tarjousosoiteInput.value === null) {
+    if (tarjousosoiteInput.value === null || tarjousosoiteInput.value === "") {
+        return false;
+    }
+
+    return true;
+}
+
+export function generoi(): void {
+
+    // Tarjousosoitteessa on oltava teksti
+    if (!onkoTarjousOsoitteessaJotain()) {
         return;
     }
+
+    const tarjousosoite: HTMLElement = document.getElementById('tarjousosoite')!;
+    const tarjousosoiteInput = <HTMLInputElement>tarjousosoite;
 
     const kauppa: Verkkokauppa = tunnistaKauppa(tarjousosoiteInput.value);
     const kaupanNimi: string = etsiKaupanNimi(kauppa);
@@ -104,16 +124,23 @@ export function generoi(): void {
     const tarjoustuote: HTMLElement = document.getElementById('tarjoustuote')!;
     const tarjoustuoteInput = <HTMLInputElement>tarjoustuote;
 
+    const tarjoushinta: HTMLElement = document.getElementById('tarjoushinta')!;
+    const tarjoushintaInput = <HTMLInputElement>tarjoushinta;
+    let hinta: string = "";
+    if (tarjoushintaInput.value !== null && tarjoushintaInput.value !== "") {
+        hinta = tarjoushintaInput.value;
+    }
+
     const bbKoodi: HTMLElement = document.getElementById('bbkoodi')!;
     const bbKoodiInput = <HTMLInputElement>bbKoodi;
-    bbKoodiInput.value = generoiBBCode(tarjoustuoteInput.value, tarjousosoiteInput.value, kaupanNimi, '', '' );
+    bbKoodiInput.value = generoiBBCode(tarjoustuoteInput.value, tarjousosoiteInput.value, kaupanNimi, '', hinta );
 
     const kopioibbNappi: HTMLElement = document.getElementById('kopioibb')!;
     const kopioibbInput = <HTMLInputElement>kopioibbNappi;
     kopioibbInput.disabled = false;
 
     const visuaalinen: HTMLElement = document.getElementById('visuaalinen')!;
-    visuaalinen.innerHTML = generoiVisuaalinen(tarjoustuoteInput.value, tarjousosoiteInput.value, kaupanNimi, '', '' );
+    visuaalinen.innerHTML = generoiVisuaalinen(tarjoustuoteInput.value, tarjousosoiteInput.value, kaupanNimi, '', hinta );
 }
 
 export function generoiBBCode(tuote: string, osoite: string, kauppa: string, voimassa: string, hinta: string): string {
