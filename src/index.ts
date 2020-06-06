@@ -107,20 +107,18 @@ export function generoi(): void {
 
 export function generoiBBCode(tuote: string, osoite: string, kauppa: string, voimassa: string, hinta: string): string {
     return `[b]Tuote:[/b] ${tuote}
-    [b]Hinta:[/b] ${hinta}
-    [b]Kauppa:[/b] ${kauppa}
-    [b]Voimassa:[/b] ${voimassa}
-    [b]Linkki:[/b] ${osoite}
-    `;
+[b]Hinta:[/b] ${hinta}
+[b]Kauppa:[/b] ${kauppa}
+[b]Voimassa:[/b] ${voimassa}
+[b]Linkki:[/b] ${osoite}`;
 }
 
 export function generoiVisuaalinen(tuote: string, osoite: string, kauppa: string, voimassa: string, hinta: string): string {
     return `<b>Tuote:</b> ${tuote} <br>
-    <b>Hinta:</b> ${hinta} <br>
-    <b>Kauppa:</b> ${kauppa} <br>
-    <b>Voimassa:</b> ${voimassa} <br>
-    <b>Linkki:</b> <a href="${osoite}">${osoite}</a>
-    `;
+<b>Hinta:</b> ${hinta} <br>
+<b>Kauppa:</b> ${kauppa} <br>
+<b>Voimassa:</b> ${voimassa} <br>
+<b>Linkki:</b> <a href="${osoite}">${osoite}</a>`;
 }
 
 export function laitaRadiotPaalle(name: string): void {
