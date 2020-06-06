@@ -1,9 +1,23 @@
 
 enum Verkkokauppa {
     Tunnistamaton,
+
     Gigantti,
-    VerkkokauppaDOTcom
+    Jimms,
+    VerkkokauppaDOTcom,
 }
+
+interface KauppojenMaaritykset {
+    kauppa: Verkkokauppa;
+    nimi: string;
+    urlit: string[];
+}
+
+const kaupat: KauppojenMaaritykset[] = [
+    { kauppa: Verkkokauppa.Gigantti, nimi: "Gigantti", urlit: ["www.gigantti.fi", "gigantti.fi"]},
+    { kauppa: Verkkokauppa.Jimms, nimi: "Jimm's PC-Store", urlit: ["www.jimms.fi", "jimms.fi"]},
+    { kauppa: Verkkokauppa.VerkkokauppaDOTcom, nimi: "Verkkokauppa.com", urlit: ["www.verkkokauppa.com", "verkkokauppa.com"]},
+]
 
 // Alustus
 const tarjousosoite: HTMLElement = document.getElementById('tarjousosoite')!;
@@ -55,10 +69,12 @@ export function kopioiBB(): void {
 export function tunnistaKauppa(osoite: string): Verkkokauppa {
 
     const url = new URL(osoite);
-    if (url.hostname === "www.gigantti.fi" || url.hostname === "gigantti.fi") {
-        return Verkkokauppa.Gigantti;
-    } else if (url.hostname === "www.verkkokauppa.com" || url.hostname === "verkkokauppa.com") {
-        return Verkkokauppa.VerkkokauppaDOTcom;
+    for (const kauppa of kaupat) {
+        for (const urlTunniste of kauppa.urlit) {
+            if (url.hostname === urlTunniste) {
+                return kauppa.kauppa;
+            }
+        }
     }
 
     return Verkkokauppa.Tunnistamaton;
