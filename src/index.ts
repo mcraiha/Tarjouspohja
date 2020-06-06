@@ -31,6 +31,7 @@ const tarjoustuote: HTMLElement = document.getElementById('tarjoustuote')!;
 if (tarjoustuote) {
     const tarjoustuoteInput = <HTMLInputElement>tarjoustuote;
     tarjoustuoteInput.disabled = false;
+    tarjoustuote.addEventListener('input', paivitaJosUrlAnnettu);
 }
 
 const tarjoushinta: HTMLElement = document.getElementById('tarjoushinta')!;
