@@ -42,6 +42,7 @@ if (tarjoushinta) {
 }
 
 laitaRadiotPaalle('valuutta');
+lisaaKuuntelijaRadioille('valuutta');
 
 laitaRadiotPaalle('voimassa');
 
@@ -130,6 +131,15 @@ export function generoi(): void {
     let hinta: string = "";
     if (tarjoushintaInput.value !== null && tarjoushintaInput.value !== "") {
         hinta = tarjoushintaInput.value;
+
+        const valittuValuutta: string = etsiValittuValuutta();
+        if (valittuValuutta === "euro") {
+            hinta += " euroa";
+        } else if (valittuValuutta === "dollari") {
+            hinta += " dollaria";
+        } else if (valittuValuutta === "muu") {
+            hinta += " " + lueOmaValuutta();
+        }
     }
 
     const bbKoodi: HTMLElement = document.getElementById('bbkoodi')!;
@@ -168,4 +178,34 @@ export function laitaRadiotPaalle(name: string): void {
             radioInput.disabled = false;
         }
     }
+}
+
+export function lisaaKuuntelijaRadioille(name: string): void {
+    const radiot: HTMLElement[] = Array.prototype.slice.call(document.getElementsByName(name));
+    if (radiot !== null && radiot.length > 0) {
+        for (const radio of radiot) {
+            radio.addEventListener('input', paivitaJosUrlAnnettu);
+        }
+    }
+}
+
+export function etsiValittuValuutta(): string {
+    const radiot: HTMLElement[] = Array.prototype.slice.call(document.getElementsByName('valuutta'));
+    
+    if (radiot !== null && radiot.length > 0) {
+        for (const radio of radiot) {
+            const radioInput = <HTMLInputElement>radio;
+            if (radioInput.checked) {
+                return radioInput.value;
+            }
+        }
+    }
+
+    return "";
+}
+
+export function lueOmaValuutta(): string {
+    const omavaluutta: HTMLElement = document.getElementById('omavaluutta')!;
+    const omavaluuttaInput = <HTMLInputElement>omavaluutta;
+    return omavaluuttaInput.value;
 }
