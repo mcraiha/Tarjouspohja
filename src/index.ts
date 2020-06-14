@@ -44,6 +44,14 @@ if (tarjoushinta) {
 laitaRadiotPaalle('valuutta');
 lisaaKuuntelijaRadioille('valuutta');
 
+const tanaan: Date = new Date();
+const huominen: Date = new Date();
+huominen.setDate(tanaan.getDate() + 1);
+
+asetaOletusPaiva('asti', huominen);
+asetaOletusPaiva('alkupaiva', tanaan);
+asetaOletusPaiva('loppupaiva', huominen);
+
 laitaRadiotPaalle('voimassa');
 lisaaKuuntelijaRadioille('voimassa');
 
@@ -253,4 +261,10 @@ export function jaaPaivaOsiin(elementinNimi: string): string[] {
     const paivaInput = <HTMLInputElement>paiva;
     const splitted: string[] = paivaInput.value.split("-");
     return splitted;
+}
+
+export function asetaOletusPaiva(elementinNimi: string, paiva: Date): void {
+    const paivaElementti: HTMLElement = document.getElementById(elementinNimi)!;
+    const paivaInput = <HTMLInputElement>paivaElementti;
+    paivaInput.valueAsDate = paiva;
 }
