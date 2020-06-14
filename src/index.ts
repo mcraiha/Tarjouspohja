@@ -157,7 +157,7 @@ export function generoi(): void {
 
     let voimassa: string = "";
     const valittuVoimassa: string = etsiValittuVoimassa();
-    console.log(valittuVoimassa);
+
     if (valittuVoimassa === "tanaan") {
         voimassa = "Tänään";
     } else if (valittuVoimassa === "huomiseen") {
