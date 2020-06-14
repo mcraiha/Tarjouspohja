@@ -45,6 +45,7 @@ laitaRadiotPaalle('valuutta');
 lisaaKuuntelijaRadioille('valuutta');
 
 laitaRadiotPaalle('voimassa');
+lisaaKuuntelijaRadioille('voimassa');
 
 const kopioibbNappi: HTMLElement = document.getElementById('kopioibb')!;
 if (kopioibbNappi) {
@@ -142,16 +143,38 @@ export function generoi(): void {
         }
     }
 
+    let voimassa: string = "";
+    const valittuVoimassa: string = etsiValittuVoimassa();
+    console.log(valittuVoimassa);
+    if (valittuVoimassa === "tanaan") {
+        voimassa = "Tänään";
+    } else if (valittuVoimassa === "huomiseen") {
+        voimassa = "Huomiseen";
+    } else if (valittuVoimassa === "eitietoa") {
+        voimassa = "Ei tietoa";
+    } else if (valittuVoimassa === "asti") {
+        const splitted: string[] = jaaPaivaOsiin('asti');
+        if (splitted.length === 3) {
+            voimassa = `${splitted[2]}.${splitted[1]}.${splitted[0]} asti`;
+        }
+    } else if (valittuVoimassa === "muu") {
+        const splittedAlku: string[] = jaaPaivaOsiin('alkupaiva');
+        const splittedLoppu: string[] = jaaPaivaOsiin('loppupaiva');
+        if (splittedAlku.length === 3 && splittedLoppu.length === 3) {
+            voimassa = `${splittedAlku[2]}.${splittedAlku[1]}.${splittedAlku[0]} - ${splittedLoppu[2]}.${splittedLoppu[1]}.${splittedLoppu[0]}`;
+        }
+    } 
+
     const bbKoodi: HTMLElement = document.getElementById('bbkoodi')!;
     const bbKoodiInput = <HTMLInputElement>bbKoodi;
-    bbKoodiInput.value = generoiBBCode(tarjoustuoteInput.value, tarjousosoiteInput.value, kaupanNimi, '', hinta );
+    bbKoodiInput.value = generoiBBCode(tarjoustuoteInput.value, tarjousosoiteInput.value, kaupanNimi, voimassa, hinta );
 
     const kopioibbNappi: HTMLElement = document.getElementById('kopioibb')!;
     const kopioibbInput = <HTMLInputElement>kopioibbNappi;
     kopioibbInput.disabled = false;
 
     const visuaalinen: HTMLElement = document.getElementById('visuaalinen')!;
-    visuaalinen.innerHTML = generoiVisuaalinen(tarjoustuoteInput.value, tarjousosoiteInput.value, kaupanNimi, '', hinta );
+    visuaalinen.innerHTML = generoiVisuaalinen(tarjoustuoteInput.value, tarjousosoiteInput.value, kaupanNimi, voimassa, hinta );
 }
 
 export function generoiBBCode(tuote: string, osoite: string, kauppa: string, voimassa: string, hinta: string): string {
@@ -204,8 +227,30 @@ export function etsiValittuValuutta(): string {
     return "";
 }
 
+export function etsiValittuVoimassa(): string {
+    const radiot: HTMLElement[] = Array.prototype.slice.call(document.getElementsByName('voimassa'));
+    
+    if (radiot !== null && radiot.length > 0) {
+        for (const radio of radiot) {
+            const radioInput = <HTMLInputElement>radio;
+            if (radioInput.checked) {
+                return radioInput.value;
+            }
+        }
+    }
+
+    return "";
+}
+
 export function lueOmaValuutta(): string {
     const omavaluutta: HTMLElement = document.getElementById('omavaluutta')!;
     const omavaluuttaInput = <HTMLInputElement>omavaluutta;
     return omavaluuttaInput.value;
+}
+
+export function jaaPaivaOsiin(elementinNimi: string): string[] {
+    const paiva: HTMLElement = document.getElementById(elementinNimi)!;
+    const paivaInput = <HTMLInputElement>paiva;
+    const splitted: string[] = paivaInput.value.split("-");
+    return splitted;
 }
