@@ -52,6 +52,10 @@ asetaOletusPaiva('asti', huominen);
 asetaOletusPaiva('alkupaiva', tanaan);
 asetaOletusPaiva('loppupaiva', huominen);
 
+lisaaKuuntelijaPaivalle('asti');
+lisaaKuuntelijaPaivalle('alkupaiva');
+lisaaKuuntelijaPaivalle('loppupaiva');
+
 laitaRadiotPaalle('voimassa');
 lisaaKuuntelijaRadioille('voimassa');
 
@@ -218,6 +222,12 @@ export function lisaaKuuntelijaRadioille(name: string): void {
             radio.addEventListener('input', paivitaJosUrlAnnettu);
         }
     }
+}
+
+export function lisaaKuuntelijaPaivalle(name: string): void {
+    const paivaElementti: HTMLElement = document.getElementById(name)!;
+    const paivaInput = <HTMLInputElement>paivaElementti;
+    paivaInput.addEventListener('input', paivitaJosUrlAnnettu);
 }
 
 export function etsiValittuValuutta(): string {
