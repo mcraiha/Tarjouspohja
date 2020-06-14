@@ -10,10 +10,10 @@ enum Verkkokauppa {
 interface KauppojenMaaritykset {
     kauppa: Verkkokauppa;
     nimi: string;
-    urlit: string[];
+    urlit: ReadonlyArray<string>;
 }
 
-const kaupat: KauppojenMaaritykset[] = [
+const kaupat: ReadonlyArray<KauppojenMaaritykset> = [
     { kauppa: Verkkokauppa.Gigantti, nimi: "Gigantti", urlit: ["www.gigantti.fi", "gigantti.fi"]},
     { kauppa: Verkkokauppa.Jimms, nimi: "Jimm's PC-Store", urlit: ["www.jimms.fi", "jimms.fi"]},
     { kauppa: Verkkokauppa.VerkkokauppaDOTcom, nimi: "Verkkokauppa.com", urlit: ["www.verkkokauppa.com", "verkkokauppa.com"]},
