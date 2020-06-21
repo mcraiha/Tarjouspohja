@@ -41,6 +41,13 @@ if (tarjoushinta) {
     tarjoushinta.addEventListener('input', paivitaJosUrlAnnettu);
 }
 
+const promokoodi: HTMLElement = document.getElementById('promokoodi')!;
+if (promokoodi) {
+    const promokoodiInput = <HTMLInputElement>promokoodi;
+    promokoodiInput.disabled = false;
+    promokoodi.addEventListener('input', paivitaJosUrlAnnettu);
+}
+
 laitaRadiotPaalle('valuutta');
 lisaaKuuntelijaRadioille('valuutta');
 
@@ -175,34 +182,43 @@ export function generoi(): void {
         if (splittedAlku.length === 3 && splittedLoppu.length === 3) {
             voimassa = `${splittedAlku[2]}.${splittedAlku[1]}.${splittedAlku[0]} - ${splittedLoppu[2]}.${splittedLoppu[1]}.${splittedLoppu[0]}`;
         }
-    } 
+    }
+
+    const promokoodi: HTMLElement = document.getElementById('promokoodi')!;
+    const promokoodiInput = <HTMLInputElement>promokoodi;
 
     const bbKoodi: HTMLElement = document.getElementById('bbkoodi')!;
     const bbKoodiInput = <HTMLInputElement>bbKoodi;
-    bbKoodiInput.value = generoiBBCode(tarjoustuoteInput.value, tarjousosoiteInput.value, kaupanNimi, voimassa, hinta );
+    bbKoodiInput.value = generoiBBCode(tarjoustuoteInput.value, tarjousosoiteInput.value, kaupanNimi, voimassa, hinta, promokoodiInput.value);
 
     const kopioibbNappi: HTMLElement = document.getElementById('kopioibb')!;
     const kopioibbInput = <HTMLInputElement>kopioibbNappi;
     kopioibbInput.disabled = false;
 
     const visuaalinen: HTMLElement = document.getElementById('visuaalinen')!;
-    visuaalinen.innerHTML = generoiVisuaalinen(tarjoustuoteInput.value, tarjousosoiteInput.value, kaupanNimi, voimassa, hinta );
+    visuaalinen.innerHTML = generoiVisuaalinen(tarjoustuoteInput.value, tarjousosoiteInput.value, kaupanNimi, voimassa, hinta, promokoodiInput.value);
 }
 
-export function generoiBBCode(tuote: string, osoite: string, kauppa: string, voimassa: string, hinta: string): string {
-    return `[b]Tuote:[/b] ${tuote}
-[b]Hinta:[/b] ${hinta}
-[b]Kauppa:[/b] ${kauppa}
-[b]Voimassa:[/b] ${voimassa}
-[b]Linkki:[/b] ${osoite}`;
+export function generoiBBCode(tuote: string, osoite: string, kauppa: string, voimassa: string, hinta: string, promokoodi: string): string {
+
+    const osatArray = new Array(`[b]Tuote:[/b] ${tuote}`, `[b]Hinta:[/b] ${hinta}`, `[b]Kauppa:[/b] ${kauppa}`, `[b]Voimassa:[/b] ${voimassa}`, `[b]Linkki:[/b] ${osoite}`);
+
+    if (promokoodi !== null && promokoodi.length > 0) {
+        osatArray.push(`[b]Promokoodi:[/b] ${promokoodi}`);
+    }
+
+    return osatArray.join("\r\n");
 }
 
-export function generoiVisuaalinen(tuote: string, osoite: string, kauppa: string, voimassa: string, hinta: string): string {
-    return `<b>Tuote:</b> ${tuote} <br>
-<b>Hinta:</b> ${hinta} <br>
-<b>Kauppa:</b> ${kauppa} <br>
-<b>Voimassa:</b> ${voimassa} <br>
-<b>Linkki:</b> <a href="${osoite}">${osoite}</a>`;
+export function generoiVisuaalinen(tuote: string, osoite: string, kauppa: string, voimassa: string, hinta: string, promokoodi: string): string {
+
+    const osatArray = new Array(`<b>Tuote:</b> ${tuote}`, `<b>Hinta:</b> ${hinta}`, `<b>Kauppa:</b> ${kauppa}`, `<b>Voimassa:</b> ${voimassa}`, `<b>Linkki:</b> <a href="${osoite}">${osoite}</a>`);
+
+    if (promokoodi !== null && promokoodi.length > 0) {
+        osatArray.push(`<b>Promokoodi:</b> ${promokoodi}`);
+    }
+
+    return osatArray.join("<br>");
 }
 
 export function laitaRadiotPaalle(name: string): void {
