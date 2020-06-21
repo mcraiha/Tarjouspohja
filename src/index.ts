@@ -2,8 +2,16 @@
 enum Verkkokauppa {
     Tunnistamaton,
 
+    CDON,
+    DNA,
+    DustinHomeDOTfi,
+    Elisa,
     Gigantti,
     Jimms,
+    Power,
+    Tehorauta,
+    Telia,
+    TietokonekauppaDOTfi,
     VerkkokauppaDOTcom,
 }
 
@@ -14,8 +22,16 @@ interface KauppojenMaaritykset {
 }
 
 const kaupat: ReadonlyArray<KauppojenMaaritykset> = [
+    { kauppa: Verkkokauppa.CDON, nimi: "CDON", urlit: ["cdon.fi"]},
+    { kauppa: Verkkokauppa.DNA, nimi: "DNA", urlit: ["kauppa4.dna.fi", "dna.fi"]},
+    { kauppa: Verkkokauppa.DustinHomeDOTfi, nimi: "DustinHome.fi", urlit: ["www.dustinhome.fi", "dustinhome.fi"]},
+    { kauppa: Verkkokauppa.Elisa, nimi: "Elisa", urlit: ["elisa.fi"]},
     { kauppa: Verkkokauppa.Gigantti, nimi: "Gigantti", urlit: ["www.gigantti.fi", "gigantti.fi"]},
     { kauppa: Verkkokauppa.Jimms, nimi: "Jimm's PC-Store", urlit: ["www.jimms.fi", "jimms.fi"]},
+    { kauppa: Verkkokauppa.Power, nimi: "Power", urlit: ["www.power.fi", "power.fi"]},
+    { kauppa: Verkkokauppa.Tehorauta, nimi: "Tehorauta", urlit: ["www.tehorauta.fi", "tehorauta.fi"]},
+    { kauppa: Verkkokauppa.Telia, nimi: "Telia", urlit: ["kauppa.telia.fi", "telia.fi"]},
+    { kauppa: Verkkokauppa.TietokonekauppaDOTfi, nimi: "Tietokonekauppa.fi", urlit: ["www.tietokonekauppa.fi", "tietokonekauppa.fi"]},
     { kauppa: Verkkokauppa.VerkkokauppaDOTcom, nimi: "Verkkokauppa.com", urlit: ["www.verkkokauppa.com", "verkkokauppa.com"]},
 ]
 
