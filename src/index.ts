@@ -8,10 +8,13 @@ enum Verkkokauppa {
     Elisa,
     Gigantti,
     Jimms,
+    Karkkainen,
+    Multitronic,
     Power,
     Tehorauta,
     Telia,
     TietokonekauppaDOTfi,
+    VeikonKone,
     VerkkokauppaDOTcom,
 }
 
@@ -28,10 +31,13 @@ const kaupat: ReadonlyArray<KauppojenMaaritykset> = [
     { kauppa: Verkkokauppa.Elisa, nimi: "Elisa", urlit: ["elisa.fi"]},
     { kauppa: Verkkokauppa.Gigantti, nimi: "Gigantti", urlit: ["www.gigantti.fi", "gigantti.fi"]},
     { kauppa: Verkkokauppa.Jimms, nimi: "Jimm's PC-Store", urlit: ["www.jimms.fi", "jimms.fi"]},
+    { kauppa: Verkkokauppa.Karkkainen, nimi: "Kärkkäinen", urlit: ["www.karkkainen.com", "karkkainen.com"]},
+    { kauppa: Verkkokauppa.Multitronic, nimi: "Multitronic", urlit: ["www.multitronic.fi", "multitronic.fi"]},
     { kauppa: Verkkokauppa.Power, nimi: "Power", urlit: ["www.power.fi", "power.fi"]},
     { kauppa: Verkkokauppa.Tehorauta, nimi: "Tehorauta", urlit: ["www.tehorauta.fi", "tehorauta.fi"]},
     { kauppa: Verkkokauppa.Telia, nimi: "Telia", urlit: ["kauppa.telia.fi", "telia.fi"]},
     { kauppa: Verkkokauppa.TietokonekauppaDOTfi, nimi: "Tietokonekauppa.fi", urlit: ["www.tietokonekauppa.fi", "tietokonekauppa.fi"]},
+    { kauppa: Verkkokauppa.VeikonKone, nimi: "Veikon Kone", urlit: ["www.veikonkone.fi", "veikonkone.fi"]},
     { kauppa: Verkkokauppa.VerkkokauppaDOTcom, nimi: "Verkkokauppa.com", urlit: ["www.verkkokauppa.com", "verkkokauppa.com"]},
 ]
 
