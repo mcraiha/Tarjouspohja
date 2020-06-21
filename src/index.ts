@@ -2,6 +2,7 @@
 enum Verkkokauppa {
     Tunnistamaton,
 
+    AmazonDOTde,
     CDON,
     DNA,
     DustinHomeDOTfi,
@@ -22,23 +23,25 @@ interface KauppojenMaaritykset {
     kauppa: Verkkokauppa;
     nimi: string;
     urlit: ReadonlyArray<string>;
+    hintamuokkaus: (hinta: string) => string;
 }
 
 const kaupat: ReadonlyArray<KauppojenMaaritykset> = [
-    { kauppa: Verkkokauppa.CDON, nimi: "CDON", urlit: ["cdon.fi"]},
-    { kauppa: Verkkokauppa.DNA, nimi: "DNA", urlit: ["kauppa4.dna.fi", "dna.fi"]},
-    { kauppa: Verkkokauppa.DustinHomeDOTfi, nimi: "DustinHome.fi", urlit: ["www.dustinhome.fi", "dustinhome.fi"]},
-    { kauppa: Verkkokauppa.Elisa, nimi: "Elisa", urlit: ["elisa.fi"]},
-    { kauppa: Verkkokauppa.Gigantti, nimi: "Gigantti", urlit: ["www.gigantti.fi", "gigantti.fi"]},
-    { kauppa: Verkkokauppa.Jimms, nimi: "Jimm's PC-Store", urlit: ["www.jimms.fi", "jimms.fi"]},
-    { kauppa: Verkkokauppa.Karkkainen, nimi: "Kärkkäinen", urlit: ["www.karkkainen.com", "karkkainen.com"]},
-    { kauppa: Verkkokauppa.Multitronic, nimi: "Multitronic", urlit: ["www.multitronic.fi", "multitronic.fi"]},
-    { kauppa: Verkkokauppa.Power, nimi: "Power", urlit: ["www.power.fi", "power.fi"]},
-    { kauppa: Verkkokauppa.Tehorauta, nimi: "Tehorauta", urlit: ["www.tehorauta.fi", "tehorauta.fi"]},
-    { kauppa: Verkkokauppa.Telia, nimi: "Telia", urlit: ["kauppa.telia.fi", "telia.fi"]},
-    { kauppa: Verkkokauppa.TietokonekauppaDOTfi, nimi: "Tietokonekauppa.fi", urlit: ["www.tietokonekauppa.fi", "tietokonekauppa.fi"]},
-    { kauppa: Verkkokauppa.VeikonKone, nimi: "Veikon Kone", urlit: ["www.veikonkone.fi", "veikonkone.fi"]},
-    { kauppa: Verkkokauppa.VerkkokauppaDOTcom, nimi: "Verkkokauppa.com", urlit: ["www.verkkokauppa.com", "verkkokauppa.com"]},
+    { kauppa: Verkkokauppa.AmazonDOTde, nimi: "Amazon.de", urlit: ["www.amazon.de", "amazon.de"], hintamuokkaus: plusVeroero},
+    { kauppa: Verkkokauppa.CDON, nimi: "CDON", urlit: ["cdon.fi"], hintamuokkaus: eiHintamuokkausta},
+    { kauppa: Verkkokauppa.DNA, nimi: "DNA", urlit: ["kauppa4.dna.fi", "dna.fi"], hintamuokkaus: eiHintamuokkausta},
+    { kauppa: Verkkokauppa.DustinHomeDOTfi, nimi: "DustinHome.fi", urlit: ["www.dustinhome.fi", "dustinhome.fi"], hintamuokkaus: eiHintamuokkausta},
+    { kauppa: Verkkokauppa.Elisa, nimi: "Elisa", urlit: ["elisa.fi"], hintamuokkaus: eiHintamuokkausta},
+    { kauppa: Verkkokauppa.Gigantti, nimi: "Gigantti", urlit: ["www.gigantti.fi", "gigantti.fi"], hintamuokkaus: eiHintamuokkausta},
+    { kauppa: Verkkokauppa.Jimms, nimi: "Jimm's PC-Store", urlit: ["www.jimms.fi", "jimms.fi"], hintamuokkaus: eiHintamuokkausta},
+    { kauppa: Verkkokauppa.Karkkainen, nimi: "Kärkkäinen", urlit: ["www.karkkainen.com", "karkkainen.com"], hintamuokkaus: eiHintamuokkausta},
+    { kauppa: Verkkokauppa.Multitronic, nimi: "Multitronic", urlit: ["www.multitronic.fi", "multitronic.fi"], hintamuokkaus: eiHintamuokkausta},
+    { kauppa: Verkkokauppa.Power, nimi: "Power", urlit: ["www.power.fi", "power.fi"], hintamuokkaus: eiHintamuokkausta},
+    { kauppa: Verkkokauppa.Tehorauta, nimi: "Tehorauta", urlit: ["www.tehorauta.fi", "tehorauta.fi"], hintamuokkaus: eiHintamuokkausta},
+    { kauppa: Verkkokauppa.Telia, nimi: "Telia", urlit: ["kauppa.telia.fi", "telia.fi"], hintamuokkaus: eiHintamuokkausta},
+    { kauppa: Verkkokauppa.TietokonekauppaDOTfi, nimi: "Tietokonekauppa.fi", urlit: ["www.tietokonekauppa.fi", "tietokonekauppa.fi"], hintamuokkaus: eiHintamuokkausta},
+    { kauppa: Verkkokauppa.VeikonKone, nimi: "Veikon Kone", urlit: ["www.veikonkone.fi", "veikonkone.fi"], hintamuokkaus: eiHintamuokkausta},
+    { kauppa: Verkkokauppa.VerkkokauppaDOTcom, nimi: "Verkkokauppa.com", urlit: ["www.verkkokauppa.com", "verkkokauppa.com"], hintamuokkaus: eiHintamuokkausta},
 ]
 
 // Alustus
@@ -141,6 +144,16 @@ export function etsiKaupanNimi(verkkokauppa: Verkkokauppa): string {
     return "";
 }
 
+export function muokkaaHintaaTarvittaessa(verkkokauppa: Verkkokauppa, hinta: string): string {
+    for (const kauppa of kaupat) {
+        if (kauppa.kauppa === verkkokauppa) {
+            return kauppa.hintamuokkaus(hinta);
+        }
+    }
+
+    return hinta;
+}
+
 export function onkoTarjousOsoitteessaJotain(): boolean {
     const tarjousosoite: HTMLElement = document.getElementById('tarjousosoite')!;
     const tarjousosoiteInput = <HTMLInputElement>tarjousosoite;
@@ -182,6 +195,9 @@ export function generoi(): void {
         } else if (valittuValuutta === "muu") {
             hinta += " " + lueOmaValuutta();
         }
+
+        // Hintaan tarvittaessa muutoksia
+        hinta = muokkaaHintaaTarvittaessa(kauppa, hinta);
     }
 
     let voimassa: string = "";
@@ -315,4 +331,12 @@ export function asetaOletusPaiva(elementinNimi: string, paiva: Date): void {
     const paivaElementti: HTMLElement = document.getElementById(elementinNimi)!;
     const paivaInput = <HTMLInputElement>paivaElementti;
     paivaInput.valueAsDate = paiva;
+}
+
+export function eiHintamuokkausta(hinta: string): string {
+    return hinta;
+}
+
+export function plusVeroero(hinta: string): string {
+    return `${hinta} + veroero`;
 }
