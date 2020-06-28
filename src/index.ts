@@ -174,18 +174,20 @@ export function generoi(): void {
 
     const tarjousosoite: HTMLElement = document.getElementById('tarjousosoite')!;
     const tarjousosoiteInput = <HTMLInputElement>tarjousosoite;
+    const turvallinenTarjousOsoite: string = teeTurvallinenTeksti(tarjousosoiteInput.value);
 
     const kauppa: Verkkokauppa = tunnistaKauppa(tarjousosoiteInput.value);
     const kaupanNimi: string = etsiKaupanNimi(kauppa);
 
     const tarjoustuote: HTMLElement = document.getElementById('tarjoustuote')!;
     const tarjoustuoteInput = <HTMLInputElement>tarjoustuote;
+    const turvallinenTarjousTuote: string = teeTurvallinenTeksti(tarjoustuoteInput.value);
 
     const tarjoushinta: HTMLElement = document.getElementById('tarjoushinta')!;
     const tarjoushintaInput = <HTMLInputElement>tarjoushinta;
     let hinta: string = "";
     if (tarjoushintaInput.value !== null && tarjoushintaInput.value !== "") {
-        hinta = tarjoushintaInput.value;
+        hinta = teeTurvallinenTeksti(tarjoushintaInput.value);
 
         const valittuValuutta: string = etsiValittuValuutta();
         if (valittuValuutta === "euro") {
@@ -224,17 +226,18 @@ export function generoi(): void {
 
     const promokoodi: HTMLElement = document.getElementById('promokoodi')!;
     const promokoodiInput = <HTMLInputElement>promokoodi;
+    const turvallinenPromokoodi: string = teeTurvallinenTeksti(promokoodiInput.value);
 
     const bbKoodi: HTMLElement = document.getElementById('bbkoodi')!;
     const bbKoodiInput = <HTMLInputElement>bbKoodi;
-    bbKoodiInput.value = generoiBBCode(tarjoustuoteInput.value, tarjousosoiteInput.value, kaupanNimi, voimassa, hinta, promokoodiInput.value);
+    bbKoodiInput.value = generoiBBCode(turvallinenTarjousTuote, turvallinenTarjousOsoite, kaupanNimi, voimassa, hinta, turvallinenPromokoodi);
 
     const kopioibbNappi: HTMLElement = document.getElementById('kopioibb')!;
     const kopioibbInput = <HTMLInputElement>kopioibbNappi;
     kopioibbInput.disabled = false;
 
     const visuaalinen: HTMLElement = document.getElementById('visuaalinen')!;
-    visuaalinen.innerHTML = generoiVisuaalinen(tarjoustuoteInput.value, tarjousosoiteInput.value, kaupanNimi, voimassa, hinta, promokoodiInput.value);
+    visuaalinen.innerHTML = generoiVisuaalinen(turvallinenTarjousTuote, turvallinenTarjousOsoite, kaupanNimi, voimassa, hinta, turvallinenPromokoodi);
 }
 
 export function generoiBBCode(tuote: string, osoite: string, kauppa: string, voimassa: string, hinta: string, promokoodi: string): string {
@@ -317,7 +320,7 @@ export function etsiValittuVoimassa(): string {
 export function lueOmaValuutta(): string {
     const omavaluutta: HTMLElement = document.getElementById('omavaluutta')!;
     const omavaluuttaInput = <HTMLInputElement>omavaluutta;
-    return omavaluuttaInput.value;
+    return teeTurvallinenTeksti(omavaluuttaInput.value);
 }
 
 export function jaaPaivaOsiin(elementinNimi: string): string[] {
@@ -339,4 +342,16 @@ export function eiHintamuokkausta(hinta: string): string {
 
 export function plusVeroero(hinta: string): string {
     return `${hinta} + veroero`;
+}
+
+export function teeTurvallinenTeksti(syote: string): string {
+    const poistoon: string[] = ["\\<", "\\>", "\\[", "\\]", '\\"'];
+    let muokattava: string = syote;
+    
+    for (const poisto of poistoon) {
+        const poistoRegExp: RegExp = new RegExp(poisto, 'g');
+        muokattava = muokattava.replace(poistoRegExp, "");
+    }
+
+    return muokattava;
 }
