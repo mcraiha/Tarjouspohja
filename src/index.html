@@ -12,54 +12,62 @@
     <noscript>
       <strong>Tarjouspohja vaatii Javascriptin toimiakseen</strong>
     </noscript>
-    <h1>Hintatarjouspohjan generoija</h1>
-    <form>
-        <label>Tarjouksen URL/osoite:</label><br>
-        <input type="url" id="tarjousosoite" placeholder="https://jokukauppa.com/tuote" disabled><br><br>
-        
-        <label>Tarjoustuote:</label><br>
-        <input type="text" id="tarjoustuote" placeholder="Peltisakset" disabled><br><br>
-        
-        <label>Tarjoushinta:</label><br>
-        <input type="number" id="tarjoushinta" placeholder="14,99" disabled><br>
+    <main>
+      <section>
+        <header>
+          <h1>Hintatarjouspohjan generoija</h1>
+        </header>
+        <form>
+            <label>Tarjouksen URL/osoite:</label>
+            <input type="url" id="tarjousosoite" placeholder="https://jokukauppa.com/tuote" disabled>
+            
+            <label>Tarjoustuote:</label>
+            <input type="text" id="tarjoustuote" placeholder="Peltisakset" disabled>
+            
+            <label>Tarjoushinta:</label>
+            <input type="number" id="tarjoushinta" placeholder="14,99" disabled>
 
-        <input type="radio" name="valuutta" value="euro" disabled>
-        <label for="euro">euroa</label><br>
-        <input type="radio" name="valuutta" value="dollari" disabled>
-        <label for="dollari">dollaria</label><br>
-        <input type="radio" name="valuutta" value="muu" disabled>
-        <input type="text" id="omavaluutta">
-        <br><br>
+            <input type="radio" name="valuutta" value="euro" disabled>
+            <label for="euro">euroa</label>
+            <input type="radio" name="valuutta" value="dollari" disabled>
+            <label for="dollari">dollaria</label>
+            <input type="radio" name="valuutta" value="muu" disabled>
+            <label for="muu">muu</label>
+            <input type="text" id="omavaluutta" placeholder="Muu valuutta tähän">
 
-        <label>Voimassa:</label><br>
-        <input type="radio" name="voimassa" value="tanaan" disabled>
-        <label for="tanaan">tänään</label><br>
+            <label>Voimassa:</label>
+            <input type="radio" name="voimassa" value="tanaan" disabled>
+            <label for="tanaan">tänään</label>
 
-        <input type="radio" name="voimassa" value="huomiseen" disabled>
-        <label for="huomiseen">huomiseen</label><br>
+            <input type="radio" name="voimassa" value="huomiseen" disabled>
+            <label for="huomiseen">huomiseen</label>
 
-        <input type="radio" name="voimassa" value="eitietoa" disabled>
-        <label for="eitietoa">ei tietoa</label><br>
+            <input type="radio" name="voimassa" value="eitietoa" disabled>
+            <label for="eitietoa">ei tietoa</label>
 
-        <input type="radio" name="voimassa" value="asti" disabled>
-        <input type="date" id="asti"> asti<br>
+            <input type="radio" name="voimassa" value="asti" disabled>
+            <input type="date" id="asti"> asti
 
-        <input type="radio" name="voimassa" value="muu" disabled>
-        <input type="date" id="alkupaiva"> - <input type="date" id="loppupaiva"><br><br>
+            <input type="radio" name="voimassa" value="muu" disabled>
+            <input type="date" id="alkupaiva"> - <input type="date" id="loppupaiva">
 
-        <label>Promokoodi:</label><br>
-        <input type="text" id="promokoodi" disabled><br><br>
+            <label>Promokoodi:</label>
+            <input type="text" id="promokoodi" disabled>
 
-        <label>BB Code:</label><br>
-        <textarea rows="9" cols="60" id="bbkoodi" readonly>BB Code generoituu tähän</textarea><br>
-        
-        <button type="button" id="kopioibb" disabled>Kopioi ✂️</button>
+            <hr>
 
-        <br><br>
+            <label>BB Code:</label>
+            <textarea rows="9" cols="60" id="bbkoodi" readonly>BB Code generoituu tähän</textarea>
+            
+            <button type="button" id="kopioibb" disabled>Kopioi BB code ✂️</button>
 
-        <label>Visuaalinen:</label><br>
-        <div id="visuaalinen">Teksti generoituu tähän</div>
-    </form>
+            <hr>
+
+            <label>Visuaalinen:</label><br>
+            <div id="visuaalinen">Teksti generoituu tähän</div>
+        </form>
+      </section>
+    </main>
   </body>
   <script type="module" src="index.js"></script>
 </html>
