@@ -1,3 +1,7 @@
+// These will be overridden during CI/CD
+const typescriptVersion: string = "{0}";
+const gitShortHash: string = "{1}";
+const buildDate: string = "{2}";
 
 enum Verkkokauppa {
     Tunnistamaton,
@@ -101,6 +105,8 @@ if (kopioibbNappi) {
     const kopioibbInput = <HTMLInputElement>kopioibbNappi;
     kopioibbInput.onclick = kopioiBB;
 }
+
+taydennaBuildiTiedot('builditiedot', buildDate, gitShortHash);
 
 // Alustus päättyy
 
@@ -365,4 +371,9 @@ export function teeTurvallinenTeksti(syote: string): string {
     }
 
     return muokattava;
+}
+
+export function taydennaBuildiTiedot(elementinNimi: string, paiva: string, shortHash: string): void {
+    const buildiElementti: HTMLElement = document.getElementById(elementinNimi)!;
+    buildiElementti.innerHTML = `${paiva} #${shortHash}`;
 }
