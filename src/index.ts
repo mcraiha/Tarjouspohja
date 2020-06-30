@@ -74,7 +74,7 @@ if (promokoodi) {
 }
 
 laitaRadiotPaalle('valuutta');
-lisaaKuuntelijaRadioille('valuutta');
+lisaaKuuntelijaRadioille('valuutta', 'input', paivitaJosUrlAnnettu);
 
 const tanaan: Date = new Date();
 const huominen: Date = new Date();
@@ -89,7 +89,7 @@ lisaaKuuntelijaPaivalle('alkupaiva');
 lisaaKuuntelijaPaivalle('loppupaiva');
 
 laitaRadiotPaalle('voimassa');
-lisaaKuuntelijaRadioille('voimassa');
+lisaaKuuntelijaRadioille('voimassa', 'input', paivitaJosUrlAnnettu);
 
 const kopioibbNappi: HTMLElement = document.getElementById('kopioibb')!;
 if (kopioibbNappi) {
@@ -272,11 +272,11 @@ export function laitaRadiotPaalle(name: string): void {
     }
 }
 
-export function lisaaKuuntelijaRadioille(name: string): void {
-    const radiot: HTMLElement[] = Array.prototype.slice.call(document.getElementsByName(name));
+export function lisaaKuuntelijaRadioille(nimi: string, kuuntele: string, kuuntelija: (this: HTMLElement, ev: Event) => any): void {
+    const radiot: HTMLElement[] = Array.prototype.slice.call(document.getElementsByName(nimi));
     if (radiot !== null && radiot.length > 0) {
         for (const radio of radiot) {
-            radio.addEventListener('input', paivitaJosUrlAnnettu);
+            radio.addEventListener(kuuntele, kuuntelija);
         }
     }
 }
@@ -321,6 +321,12 @@ export function lueOmaValuutta(): string {
     const omavaluutta: HTMLElement = document.getElementById('omavaluutta')!;
     const omavaluuttaInput = <HTMLInputElement>omavaluutta;
     return teeTurvallinenTeksti(omavaluuttaInput.value);
+}
+
+export function salliOmaValuutta(sallittu: boolean) {
+    const omavaluutta: HTMLElement = document.getElementById('omavaluutta')!;
+    const omavaluuttaInput = <HTMLInputElement>omavaluutta;
+    omavaluuttaInput.disabled = !sallittu;
 }
 
 export function jaaPaivaOsiin(elementinNimi: string): string[] {
