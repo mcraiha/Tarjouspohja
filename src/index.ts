@@ -75,6 +75,11 @@ if (promokoodi) {
 
 laitaRadiotPaalle('valuutta');
 lisaaKuuntelijaRadioille('valuutta', 'input', paivitaJosUrlAnnettu);
+const omavaluutta: HTMLElement = document.getElementById('omavaluutta')!;
+if (omavaluutta) {
+    const omavaluuttaInput = <HTMLInputElement>omavaluutta;
+    omavaluuttaInput.addEventListener('input', paivitaJosUrlAnnettu);
+}
 
 const tanaan: Date = new Date();
 const huominen: Date = new Date();
