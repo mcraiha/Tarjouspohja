@@ -1,0 +1,34 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- master
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+- script: 
+  displayName: 'Run a one-line script'
+
+- task: NodeTool@0 
+  inputs:
+    versionSpec: '12.x' # replace this value with the version that you need for your project
+
+- script: npm install -g typescript
+
+- script: cd src
+
+- script: bash taydenna.sh
+
+- script: tsc
+
+- script: cp index.html dist/
+
+- script: cp tietoja.html dist/
+
+- script: cp testi.html dist/
+
+- script: cp mvp.css dist/
