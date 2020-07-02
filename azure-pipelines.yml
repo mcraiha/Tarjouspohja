@@ -19,16 +19,20 @@ steps:
 
 - script: npm install -g typescript
 
-- script: pushd src
-
 - script: bash taydenna.sh
+  workingDirectory: src
 
 - script: tsc
+  workingDirectory: src
 
 - script: cp index.html dist/
+  workingDirectory: src
 
 - script: cp tietoja.html dist/
+  workingDirectory: src
 
 - script: cp testi.html dist/
+  workingDirectory: src
 
 - script: cp mvp.css dist/
+  workingDirectory: src
