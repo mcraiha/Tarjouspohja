@@ -79,6 +79,7 @@ if (promokoodi) {
 
 laitaRadiotPaalle('valuutta');
 lisaaKuuntelijaRadioille('valuutta', 'input', paivitaJosUrlAnnettu);
+lisaaKuuntelijaRadioille('valuutta', 'change', omaValuuttaPaalleTarvittaessa);
 const omavaluutta: HTMLElement = document.getElementById('omavaluutta')!;
 if (omavaluutta) {
     const omavaluuttaInput = <HTMLInputElement>omavaluutta;
@@ -332,6 +333,12 @@ export function lueOmaValuutta(): string {
     const omavaluutta: HTMLElement = document.getElementById('omavaluutta')!;
     const omavaluuttaInput = <HTMLInputElement>omavaluutta;
     return teeTurvallinenTeksti(omavaluuttaInput.value);
+}
+
+export function omaValuuttaPaalleTarvittaessa(): void {
+    const valittuValuutta: string = etsiValittuValuutta();
+    const voiSyottaa: boolean = (valittuValuutta === "muu");
+    salliOmaValuutta(voiSyottaa);
 }
 
 export function salliOmaValuutta(sallittu: boolean) {
