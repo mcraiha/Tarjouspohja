@@ -19,7 +19,7 @@ steps:
 
 - script: npm install -g typescript
 
-- script: cd src
+- script: pushd src
 
 - script: bash taydenna.sh
 
