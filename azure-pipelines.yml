@@ -37,6 +37,9 @@ steps:
 - script: cp error.html dist/
   workingDirectory: src
 
+- script: cp favicon.ico dist/
+  workingDirectory: src  
+
 - script: cp mvp.css dist/
   workingDirectory: src
 
