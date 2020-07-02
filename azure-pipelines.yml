@@ -34,6 +34,9 @@ steps:
 - script: cp testi.html dist/
   workingDirectory: src
 
+- script: cp error.html dist/
+  workingDirectory: src
+
 - script: cp mvp.css dist/
   workingDirectory: src
 
