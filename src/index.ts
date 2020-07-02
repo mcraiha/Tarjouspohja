@@ -112,7 +112,7 @@ taydennaBuildiTiedot('builditiedot', buildDate, gitShortHash);
 
 export function tarkistaUrl(event: Event): void {
     if ((<HTMLInputElement>event.target).value) {
-        console.log((<HTMLInputElement>event.target).value);
+        //console.log((<HTMLInputElement>event.target).value);
         generoi();
     }
        
@@ -133,13 +133,18 @@ export function kopioiBB(): void {
 
 export function tunnistaKauppa(osoite: string): Verkkokauppa {
 
-    const url = new URL(osoite);
-    for (const kauppa of kaupat) {
-        for (const urlTunniste of kauppa.urlit) {
-            if (url.hostname === urlTunniste) {
-                return kauppa.kauppa;
+    try {
+        const url = new URL(osoite);
+        for (const kauppa of kaupat) {
+            for (const urlTunniste of kauppa.urlit) {
+                if (url.hostname === urlTunniste) {
+                    return kauppa.kauppa;
+                }
             }
         }
+    } 
+    catch (error) {
+
     }
 
     return Verkkokauppa.Tunnistamaton;
