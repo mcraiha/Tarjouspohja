@@ -37,7 +37,7 @@
           <input type="text" id="omavaluutta" placeholder="Muu valuutta tähän" disabled>
 
           <label>Voimassa:</label>
-          <input type="radio" name="voimassa" value="tanaan" disabled>
+          <input type="radio" name="voimassa" value="tanaan" checked="checked" disabled>
           <label for="tanaan">tänään</label>
 
           <input type="radio" name="voimassa" value="huomiseen" disabled>
@@ -47,10 +47,15 @@
           <label for="eitietoa">ei tietoa</label>
 
           <input type="radio" name="voimassa" value="asti" disabled>
-          <input type="date" id="asti"> asti
+          <label for="asti">saakka</label>
 
           <input type="radio" name="voimassa" value="muu" disabled>
-          <input type="date" id="alkupaiva"> - <input type="date" id="loppupaiva">
+          <label for="muu">muu</label>
+
+          <label>Alkupäivä:</label>
+          <input type="date" id="alkupaiva" disabled>
+          <label>Loppupäivä:</label>
+          <input type="date" id="loppupaiva" disabled>
 
           <label>Promokoodi:</label>
           <input type="text" id="promokoodi" disabled>

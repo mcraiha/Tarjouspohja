@@ -90,16 +90,15 @@ const tanaan: Date = new Date();
 const huominen: Date = new Date();
 huominen.setDate(tanaan.getDate() + 1);
 
-asetaOletusPaiva('asti', huominen);
 asetaOletusPaiva('alkupaiva', tanaan);
 asetaOletusPaiva('loppupaiva', huominen);
 
-lisaaKuuntelijaPaivalle('asti');
 lisaaKuuntelijaPaivalle('alkupaiva');
 lisaaKuuntelijaPaivalle('loppupaiva');
 
 laitaRadiotPaalle('voimassa');
 lisaaKuuntelijaRadioille('voimassa', 'input', paivitaJosUrlAnnettu);
+lisaaKuuntelijaRadioille('voimassa', 'change', halututPaivienSyototPaalleTarvittaessa);
 
 const kopioibbNappi: HTMLElement = document.getElementById('kopioibb')!;
 if (kopioibbNappi) {
@@ -224,9 +223,9 @@ export function generoi(): void {
     } else if (valittuVoimassa === "eitietoa") {
         voimassa = "Ei tietoa";
     } else if (valittuVoimassa === "asti") {
-        const splitted: string[] = jaaPaivaOsiin('asti');
+        const splitted: string[] = jaaPaivaOsiin('loppupaiva');
         if (splitted.length === 3) {
-            voimassa = `${splitted[2]}.${splitted[1]}.${splitted[0]} asti`;
+            voimassa = `${splitted[2]}.${splitted[1]}.${splitted[0]} saakka`;
         }
     } else if (valittuVoimassa === "muu") {
         const splittedAlku: string[] = jaaPaivaOsiin('alkupaiva');
@@ -358,6 +357,28 @@ export function asetaOletusPaiva(elementinNimi: string, paiva: Date): void {
     const paivaElementti: HTMLElement = document.getElementById(elementinNimi)!;
     const paivaInput = <HTMLInputElement>paivaElementti;
     paivaInput.valueAsDate = paiva;
+}
+
+export function halututPaivienSyototPaalleTarvittaessa(): void {
+    const alkupaivaElementti: HTMLElement = document.getElementById('alkupaiva')!;
+    const alkupaivaInput = <HTMLInputElement>alkupaivaElementti;
+
+    const loppupaivaElementti: HTMLElement = document.getElementById('loppupaiva')!;
+    const loppupaivaInput = <HTMLInputElement>loppupaivaElementti;
+
+    const valittuVoimassa: string = etsiValittuVoimassa();
+    if (valittuVoimassa === "asti") {
+        alkupaivaInput.disabled = true;
+        loppupaivaInput.disabled = false;
+    }
+    else if (valittuVoimassa === "muu") {
+        alkupaivaInput.disabled = false;
+        loppupaivaInput.disabled = false;
+    }
+    else {
+        alkupaivaInput.disabled = true;
+        loppupaivaInput.disabled = true;
+    }
 }
 
 export function eiHintamuokkausta(hinta: string): string {
