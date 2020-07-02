@@ -41,8 +41,8 @@ steps:
   displayName: Install AWS CLI
 
 - script: aws s3 sync ./dist s3://tarjous.raiha.rocks
- displayName: Deploy website
- workingDirectory: src
- env:
- AWS_ACCESS_KEY_ID: $(AWS_ACCESS_KEY_ID)
- AWS_SECRET_ACCESS_KEY: $(AWS_SECRET_ACCESS_KEY)
+  displayName: Deploy website
+  workingDirectory: src
+  env:
+  AWS_ACCESS_KEY_ID: $(AWS_ACCESS_KEY_ID)
+  AWS_SECRET_ACCESS_KEY: $(AWS_SECRET_ACCESS_KEY)
