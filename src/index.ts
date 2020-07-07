@@ -27,25 +27,26 @@ interface KauppojenMaaritykset {
     kauppa: Verkkokauppa;
     nimi: string;
     urlit: ReadonlyArray<string>;
+    naytaVeroerolaskuri: boolean;
     hintamuokkaus: (hinta: string) => string;
 }
 
 const kaupat: ReadonlyArray<KauppojenMaaritykset> = [
-    { kauppa: Verkkokauppa.AmazonDOTde, nimi: "Amazon.de", urlit: ["www.amazon.de", "amazon.de"], hintamuokkaus: plusVeroero},
-    { kauppa: Verkkokauppa.CDON, nimi: "CDON", urlit: ["cdon.fi"], hintamuokkaus: eiHintamuokkausta},
-    { kauppa: Verkkokauppa.DNA, nimi: "DNA", urlit: ["kauppa4.dna.fi", "dna.fi"], hintamuokkaus: eiHintamuokkausta},
-    { kauppa: Verkkokauppa.DustinHomeDOTfi, nimi: "DustinHome.fi", urlit: ["www.dustinhome.fi", "dustinhome.fi"], hintamuokkaus: eiHintamuokkausta},
-    { kauppa: Verkkokauppa.Elisa, nimi: "Elisa", urlit: ["elisa.fi"], hintamuokkaus: eiHintamuokkausta},
-    { kauppa: Verkkokauppa.Gigantti, nimi: "Gigantti", urlit: ["www.gigantti.fi", "gigantti.fi"], hintamuokkaus: eiHintamuokkausta},
-    { kauppa: Verkkokauppa.Jimms, nimi: "Jimm's PC-Store", urlit: ["www.jimms.fi", "jimms.fi"], hintamuokkaus: eiHintamuokkausta},
-    { kauppa: Verkkokauppa.Karkkainen, nimi: "Kärkkäinen", urlit: ["www.karkkainen.com", "karkkainen.com"], hintamuokkaus: eiHintamuokkausta},
-    { kauppa: Verkkokauppa.Multitronic, nimi: "Multitronic", urlit: ["www.multitronic.fi", "multitronic.fi"], hintamuokkaus: eiHintamuokkausta},
-    { kauppa: Verkkokauppa.Power, nimi: "Power", urlit: ["www.power.fi", "power.fi"], hintamuokkaus: eiHintamuokkausta},
-    { kauppa: Verkkokauppa.Tehorauta, nimi: "Tehorauta", urlit: ["www.tehorauta.fi", "tehorauta.fi"], hintamuokkaus: eiHintamuokkausta},
-    { kauppa: Verkkokauppa.Telia, nimi: "Telia", urlit: ["kauppa.telia.fi", "telia.fi"], hintamuokkaus: eiHintamuokkausta},
-    { kauppa: Verkkokauppa.TietokonekauppaDOTfi, nimi: "Tietokonekauppa.fi", urlit: ["www.tietokonekauppa.fi", "tietokonekauppa.fi"], hintamuokkaus: eiHintamuokkausta},
-    { kauppa: Verkkokauppa.VeikonKone, nimi: "Veikon Kone", urlit: ["www.veikonkone.fi", "veikonkone.fi"], hintamuokkaus: eiHintamuokkausta},
-    { kauppa: Verkkokauppa.VerkkokauppaDOTcom, nimi: "Verkkokauppa.com", urlit: ["www.verkkokauppa.com", "verkkokauppa.com"], hintamuokkaus: eiHintamuokkausta},
+    { kauppa: Verkkokauppa.AmazonDOTde, nimi: "Amazon.de", urlit: ["www.amazon.de", "amazon.de"], naytaVeroerolaskuri: true, hintamuokkaus: eiHintamuokkausta},
+    { kauppa: Verkkokauppa.CDON, nimi: "CDON", urlit: ["cdon.fi"], naytaVeroerolaskuri: false, hintamuokkaus: eiHintamuokkausta},
+    { kauppa: Verkkokauppa.DNA, nimi: "DNA", urlit: ["kauppa4.dna.fi", "dna.fi"], naytaVeroerolaskuri: false, hintamuokkaus: eiHintamuokkausta},
+    { kauppa: Verkkokauppa.DustinHomeDOTfi, nimi: "DustinHome.fi", urlit: ["www.dustinhome.fi", "dustinhome.fi"], naytaVeroerolaskuri: false, hintamuokkaus: eiHintamuokkausta},
+    { kauppa: Verkkokauppa.Elisa, nimi: "Elisa", urlit: ["elisa.fi"], naytaVeroerolaskuri: false, hintamuokkaus: eiHintamuokkausta},
+    { kauppa: Verkkokauppa.Gigantti, nimi: "Gigantti", urlit: ["www.gigantti.fi", "gigantti.fi"], naytaVeroerolaskuri: false, hintamuokkaus: eiHintamuokkausta},
+    { kauppa: Verkkokauppa.Jimms, nimi: "Jimm's PC-Store", urlit: ["www.jimms.fi", "jimms.fi"], naytaVeroerolaskuri: false, hintamuokkaus: eiHintamuokkausta},
+    { kauppa: Verkkokauppa.Karkkainen, nimi: "Kärkkäinen", urlit: ["www.karkkainen.com", "karkkainen.com"], naytaVeroerolaskuri: false, hintamuokkaus: eiHintamuokkausta},
+    { kauppa: Verkkokauppa.Multitronic, nimi: "Multitronic", urlit: ["www.multitronic.fi", "multitronic.fi"], naytaVeroerolaskuri: false, hintamuokkaus: eiHintamuokkausta},
+    { kauppa: Verkkokauppa.Power, nimi: "Power", urlit: ["www.power.fi", "power.fi"], naytaVeroerolaskuri: false, hintamuokkaus: eiHintamuokkausta},
+    { kauppa: Verkkokauppa.Tehorauta, nimi: "Tehorauta", urlit: ["www.tehorauta.fi", "tehorauta.fi"], naytaVeroerolaskuri: false, hintamuokkaus: eiHintamuokkausta},
+    { kauppa: Verkkokauppa.Telia, nimi: "Telia", urlit: ["kauppa.telia.fi", "telia.fi"], naytaVeroerolaskuri: false, hintamuokkaus: eiHintamuokkausta},
+    { kauppa: Verkkokauppa.TietokonekauppaDOTfi, nimi: "Tietokonekauppa.fi", urlit: ["www.tietokonekauppa.fi", "tietokonekauppa.fi"], naytaVeroerolaskuri: false, hintamuokkaus: eiHintamuokkausta},
+    { kauppa: Verkkokauppa.VeikonKone, nimi: "Veikon Kone", urlit: ["www.veikonkone.fi", "veikonkone.fi"], naytaVeroerolaskuri: false, hintamuokkaus: eiHintamuokkausta},
+    { kauppa: Verkkokauppa.VerkkokauppaDOTcom, nimi: "Verkkokauppa.com", urlit: ["www.verkkokauppa.com", "verkkokauppa.com"], naytaVeroerolaskuri: false, hintamuokkaus: eiHintamuokkausta},
 ]
 
 // Alustus
@@ -116,6 +117,18 @@ const httpNappi: HTMLElement = document.getElementById('lisaahttp')!;
 if (httpNappi) {
     const httpNappiInput = <HTMLInputElement>httpNappi;
     httpNappiInput.onclick = lisaaHTTPOsoitteeseen;
+}
+
+const kohdemaanalv: HTMLElement = document.getElementById('kohdemaanalv')!;
+if (kohdemaanalv) {
+    const kohdemaanalvInput = <HTMLInputElement>kohdemaanalv;
+    kohdemaanalvInput.addEventListener('input', paivitaJosUrlAnnettu);
+}
+
+const suomenalv: HTMLElement = document.getElementById('suomenalv')!;
+if (suomenalv) {
+    const suomenalvInput = <HTMLInputElement>suomenalv;
+    suomenalvInput.addEventListener('input', paivitaJosUrlAnnettu);
 }
 
 taydennaBuildiTiedot('builditiedot', buildDate, gitShortHash);
@@ -189,6 +202,22 @@ export function muokkaaHintaaTarvittaessa(verkkokauppa: Verkkokauppa, hinta: str
     return hinta;
 }
 
+export function naytaVeroerolaskuriTarvittaessa(verkkokauppa: Verkkokauppa): void {
+    for (const kauppa of kaupat) {
+        if (kauppa.kauppa === verkkokauppa && kauppa.naytaVeroerolaskuri) {
+            veroerolaskuri(true);
+            return;
+        }
+    }
+
+    veroerolaskuri(false);
+}
+
+export function onkoVeroerolaskuriKaytossa(): boolean {
+    const htmlElementti: HTMLElement = document.getElementById('veroerolaskurivanhempi')!;
+    return !htmlElementti.hidden;
+}
+
 export function onkoTarjousOsoitteessaJotain(): boolean {
     const tarjousosoite: HTMLElement = document.getElementById('tarjousosoite')!;
     const tarjousosoiteInput = <HTMLInputElement>tarjousosoite;
@@ -232,27 +261,51 @@ export function generoi(): void {
     const kauppa: Verkkokauppa = tunnistaKauppa(tarjousosoiteInput.value);
     const kaupanNimi: string = etsiKaupanNimi(kauppa);
 
+    naytaVeroerolaskuriTarvittaessa(kauppa);
+
     const tarjoustuote: HTMLElement = document.getElementById('tarjoustuote')!;
     const tarjoustuoteInput = <HTMLInputElement>tarjoustuote;
     const turvallinenTarjousTuote: string = teeTurvallinenTeksti(tarjoustuoteInput.value);
 
     const tarjoushinta: HTMLElement = document.getElementById('tarjoushinta')!;
     const tarjoushintaInput = <HTMLInputElement>tarjoushinta;
+    const tarjoushintaArvo = tarjoushintaInput.value;
     let hinta: string = "";
-    if (tarjoushintaInput.value !== null && tarjoushintaInput.value !== "") {
-        hinta = teeTurvallinenTeksti(tarjoushintaInput.value);
 
-        const valittuValuutta: string = etsiValittuValuutta();
-        if (valittuValuutta === "euro") {
-            hinta += " euroa";
-        } else if (valittuValuutta === "dollari") {
-            hinta += " dollaria";
-        } else if (valittuValuutta === "muu") {
-            hinta += " " + lueOmaValuutta();
+    const valittuValuutta: string = etsiValittuValuutta();
+
+    if (tarjoushintaArvo !== null && tarjoushintaArvo !== "") {
+        if (onkoVeroerolaskuriKaytossa())
+        {
+            const luettuHinta: number = parseInt(tarjoushintaInput.value);
+            if (luettuHinta !== NaN) {
+                const kohdemaanAlv: HTMLElement = document.getElementById('kohdemaanalv')!;
+                const kohdemaanAlvInput = <HTMLInputElement>kohdemaanAlv;
+                const kohdemaanAlvAvattuna: number = 1 + (parseInt(kohdemaanAlvInput.value) / 100);
+
+                const suomenAlv: HTMLElement = document.getElementById('suomenalv')!;
+                const suomenAlvInput = <HTMLInputElement>suomenAlv;
+                const suomenAlvAvattuna: number = 1 + (parseInt(suomenAlvInput.value) / 100);
+
+                const laskettuHinta: number = parseFloat(tarjoushintaArvo) * suomenAlvAvattuna / kohdemaanAlvAvattuna;
+                hinta = laskettuHinta.toFixed(2).toString();
+
+                const lopullinenhinta: HTMLElement = document.getElementById('lopullinenhinta')!;
+                const lopullinenhintaInput = <HTMLInputElement>lopullinenhinta;
+                lopullinenhintaInput.value = hinta;
+
+                hinta = lisaaValuuttaHintaan(hinta, valittuValuutta);
+            }
         }
+        else
+        {
+            hinta = teeTurvallinenTeksti(tarjoushintaInput.value);
+            
+            hinta = lisaaValuuttaHintaan(hinta, valittuValuutta);
 
-        // Hintaan tarvittaessa muutoksia
-        hinta = muokkaaHintaaTarvittaessa(kauppa, hinta);
+            // Hintaan tarvittaessa muutoksia
+            hinta = muokkaaHintaaTarvittaessa(kauppa, hinta);
+        }
     }
 
     let voimassa: string = "";
@@ -431,6 +484,18 @@ export function plusVeroero(hinta: string): string {
     return `${hinta} + veroero`;
 }
 
+export function lisaaValuuttaHintaan(hinta: string, valuutta: string): string {
+    if (valuutta === "euro") {
+        hinta += " euroa";
+    } else if (valuutta === "dollari") {
+        hinta += " dollaria";
+    } else if (valuutta === "muu") {
+        hinta += " " + lueOmaValuutta();
+    }
+
+    return hinta;
+}
+
 export function teeTurvallinenTeksti(syote: string): string {
     const poistoon: string[] = ["\\<", "\\>", "\\[", "\\]", '\\"'];
     let muokattava: string = syote;
@@ -449,6 +514,11 @@ export function httpLisaykset(nakyviin: boolean): void {
 
     httpsNappi.hidden = !nakyviin;
     httpNappi.hidden = !nakyviin;
+}
+
+export function veroerolaskuri(nakyviin: boolean): void {
+    const veroerolaskurivanhempi: HTMLElement = document.getElementById('veroerolaskurivanhempi')!;
+    veroerolaskurivanhempi.hidden = !nakyviin;
 }
 
 export function taydennaBuildiTiedot(elementinNimi: string, paiva: string, shortHash: string): void {
