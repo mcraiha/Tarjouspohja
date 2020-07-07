@@ -408,5 +408,5 @@ export function teeTurvallinenTeksti(syote: string): string {
 
 export function taydennaBuildiTiedot(elementinNimi: string, paiva: string, shortHash: string): void {
     const buildiElementti: HTMLElement = document.getElementById(elementinNimi)!;
-    buildiElementti.innerHTML = `${paiva} #${shortHash}`;
+    buildiElementti.innerHTML = `${paiva} <a href="https://github.com/mcraiha/Tarjouspohja/commit/${shortHash}">#${shortHash}</a>`;
 }
