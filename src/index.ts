@@ -106,13 +106,32 @@ if (kopioibbNappi) {
     kopioibbInput.onclick = kopioiBB;
 }
 
+const httpsNappi: HTMLElement = document.getElementById('lisaahttps')!;
+if (httpsNappi) {
+    const httpsNappiInput = <HTMLInputElement>httpsNappi;
+    httpsNappiInput.onclick = lisaaHTTPSOsoitteeseen;
+}
+
+const httpNappi: HTMLElement = document.getElementById('lisaahttp')!;
+if (httpNappi) {
+    const httpNappiInput = <HTMLInputElement>httpNappi;
+    httpNappiInput.onclick = lisaaHTTPOsoitteeseen;
+}
+
 taydennaBuildiTiedot('builditiedot', buildDate, gitShortHash);
 
 // Alustus päättyy
 
 export function tarkistaUrl(event: Event): void {
-    if ((<HTMLInputElement>event.target).value) {
-        //console.log((<HTMLInputElement>event.target).value);
+    const annettuOsoite: string = (<HTMLInputElement>event.target).value;
+    if (annettuOsoite) {
+        if (annettuOsoite.length > 4 && annettuOsoite.indexOf("http") !== 0) {
+            httpLisaykset(true);
+        } 
+        else {
+            httpLisaykset(false);
+        }
+
         generoi();
     }
        
@@ -179,6 +198,24 @@ export function onkoTarjousOsoitteessaJotain(): boolean {
     }
 
     return true;
+}
+
+export function muokkaaTarjousOsoitetta(lisaysAlkuun: string): void {
+    const tarjousosoite: HTMLElement = document.getElementById('tarjousosoite')!;
+    const tarjousosoiteInput = <HTMLInputElement>tarjousosoite;
+    tarjousosoiteInput.value = lisaysAlkuun + tarjousosoiteInput.value;
+}
+
+export function lisaaHTTPSOsoitteeseen(): void {
+    muokkaaTarjousOsoitetta("https://");
+    httpLisaykset(false);
+    generoi();
+}
+
+export function lisaaHTTPOsoitteeseen(): void {
+    muokkaaTarjousOsoitetta("http://");
+    httpLisaykset(false);
+    generoi();
 }
 
 export function generoi(): void {
@@ -404,6 +441,14 @@ export function teeTurvallinenTeksti(syote: string): string {
     }
 
     return muokattava;
+}
+
+export function httpLisaykset(nakyviin: boolean): void {
+    const httpsNappi: HTMLElement = document.getElementById('lisaahttps')!;
+    const httpNappi: HTMLElement = document.getElementById('lisaahttp')!;
+
+    httpsNappi.hidden = !nakyviin;
+    httpNappi.hidden = !nakyviin;
 }
 
 export function taydennaBuildiTiedot(elementinNimi: string, paiva: string, shortHash: string): void {
