@@ -288,18 +288,18 @@ export function generoi(): void {
                 const suomenAlvAvattuna: number = 1 + (parseInt(suomenAlvInput.value) / 100);
 
                 const laskettuHinta: number = parseFloat(tarjoushintaArvo) * suomenAlvAvattuna / kohdemaanAlvAvattuna;
-                hinta = laskettuHinta.toFixed(2).toString();
+                hinta = pistePilkuksiTarvittaessa(laskettuHinta.toFixed(2).toString());
 
                 const lopullinenhinta: HTMLElement = document.getElementById('lopullinenhinta')!;
                 const lopullinenhintaInput = <HTMLInputElement>lopullinenhinta;
                 lopullinenhintaInput.value = hinta;
 
-                hinta = lisaaValuuttaHintaan(hinta, valittuValuutta);
+                hinta = lisaaValuuttaHintaan(hinta, valittuValuutta) + " (veroero huomioitu)";
             }
         }
         else
         {
-            hinta = teeTurvallinenTeksti(tarjoushintaInput.value);
+            hinta = pistePilkuksiTarvittaessa(teeTurvallinenTeksti(tarjoushintaInput.value));
             
             hinta = lisaaValuuttaHintaan(hinta, valittuValuutta);
 
@@ -506,6 +506,10 @@ export function teeTurvallinenTeksti(syote: string): string {
     }
 
     return muokattava;
+}
+
+export function pistePilkuksiTarvittaessa(syote: string) : string {
+    return syote.replace(".", ",");
 }
 
 export function httpLisaykset(nakyviin: boolean): void {
