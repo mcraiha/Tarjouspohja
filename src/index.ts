@@ -8,6 +8,7 @@ enum Verkkokauppa {
 
     AmazonDOTde,
     CDON,
+    ClasOhlson,
     DNA,
     DustinHomeDOTfi,
     Elisa,
@@ -37,6 +38,7 @@ interface KauppojenMaaritykset {
 const kaupat: ReadonlyArray<KauppojenMaaritykset> = [
     { kauppa: Verkkokauppa.AmazonDOTde, nimi: "Amazon.de", urlit: ["www.amazon.de", "amazon.de"], naytaVeroerolaskuri: true, hintamuokkaus: eiHintamuokkausta},
     { kauppa: Verkkokauppa.CDON, nimi: "CDON", urlit: ["cdon.fi"], naytaVeroerolaskuri: false, hintamuokkaus: eiHintamuokkausta},
+    { kauppa: Verkkokauppa.ClasOhlson, nimi: "Clas Ohlson", urlit: ["www.clasohlson.com", "clasohlson.com"], naytaVeroerolaskuri: false, hintamuokkaus: eiHintamuokkausta},
     { kauppa: Verkkokauppa.DNA, nimi: "DNA", urlit: ["kauppa4.dna.fi", "dna.fi"], naytaVeroerolaskuri: false, hintamuokkaus: eiHintamuokkausta},
     { kauppa: Verkkokauppa.DustinHomeDOTfi, nimi: "DustinHome.fi", urlit: ["www.dustinhome.fi", "dustinhome.fi"], naytaVeroerolaskuri: false, hintamuokkaus: eiHintamuokkausta},
     { kauppa: Verkkokauppa.Elisa, nimi: "Elisa", urlit: ["elisa.fi"], naytaVeroerolaskuri: false, hintamuokkaus: eiHintamuokkausta},
