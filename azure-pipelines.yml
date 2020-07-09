@@ -43,6 +43,12 @@ steps:
 - script: cp mvp.css dist/
   workingDirectory: src
 
+- script: cp manifest.webmanifest dist/
+  workingDirectory: src
+
+- script: cp *.png dist/
+  workingDirectory: src
+
 - script: sudo apt-get install -y awscli
   displayName: Install AWS CLI
 
