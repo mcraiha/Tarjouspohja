@@ -22,6 +22,7 @@ enum Verkkokauppa {
     TietokonekauppaDOTfi,
     VeikonKone,
     VerkkokauppaDOTcom,
+    XXL,
 }
 
 interface KauppojenMaaritykset {
@@ -49,6 +50,7 @@ const kaupat: ReadonlyArray<KauppojenMaaritykset> = [
     { kauppa: Verkkokauppa.TietokonekauppaDOTfi, nimi: "Tietokonekauppa.fi", urlit: ["www.tietokonekauppa.fi", "tietokonekauppa.fi"], naytaVeroerolaskuri: false, hintamuokkaus: eiHintamuokkausta},
     { kauppa: Verkkokauppa.VeikonKone, nimi: "Veikon Kone", urlit: ["www.veikonkone.fi", "veikonkone.fi"], naytaVeroerolaskuri: false, hintamuokkaus: eiHintamuokkausta},
     { kauppa: Verkkokauppa.VerkkokauppaDOTcom, nimi: "Verkkokauppa.com", urlit: ["www.verkkokauppa.com", "verkkokauppa.com"], naytaVeroerolaskuri: false, hintamuokkaus: eiHintamuokkausta},
+    { kauppa: Verkkokauppa.XXL, nimi: "XXL", urlit: ["www.xxl.fi", "xxl.fi"], naytaVeroerolaskuri: false, hintamuokkaus: eiHintamuokkausta},
 ]
 
 // Alustus
