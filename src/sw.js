@@ -1,7 +1,7 @@
 // Service worker
 
 // Välimuistin nimi, versionumeroa kasvatetaan päivityksien yhteydessä
-const PRECACHE = 'v1';
+const PRECACHE = 'v2';
 
 // Lista URL:eista, jotka otetaan aina alussa välimuistiin
 const PRECACHE_URLS = [
@@ -9,7 +9,8 @@ const PRECACHE_URLS = [
   './', // Alias index.html
   'tietoja.html',
   'mvp.css',
-  'index.js'
+  'index.js',
+  'favicon.ico'
 ];
 
 // Lataa kaikki tarvittavat osat muistiin, kun asennus tapahtuu
@@ -32,5 +33,22 @@ self.addEventListener('activate', event => {
         return caches.delete(cacheToDelete);
       }));
     }).then(() => self.clients.claim())
+  );
+});
+
+// Palauttaa välimuistista löytyvät, jos niitä on
+self.addEventListener('fetch', function(event) {
+  event.respondWith(
+    caches.match(event.request)
+      .then(function(response) {
+        // Löytyy välimuistista
+        if (response) {
+          return response;
+        }
+
+        // Haetaan internetistä
+        return fetch(event.request);
+      }
+    )
   );
 });
