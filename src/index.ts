@@ -58,6 +58,10 @@ const kaupat: ReadonlyArray<KauppojenMaaritykset> = [
 ]
 
 // Alustus
+if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('sw.js');
+}
+
 const tarjousosoite: HTMLElement = document.getElementById('tarjousosoite')!;
 if (tarjousosoite) {
     const tarjousosoiteInput = <HTMLInputElement>tarjousosoite;

@@ -25,6 +25,9 @@ steps:
 - script: tsc
   workingDirectory: src
 
+- script: cp sw.js dist/
+  workingDirectory: src
+
 - script: cp index.html dist/
   workingDirectory: src
 
