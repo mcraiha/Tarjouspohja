@@ -1,0 +1,22 @@
+{
+    "name": "Hintatarjouspohjan generoija",
+    "short_name": "Tarjouspohja",
+    "description": "Tarjouspohja - Ilmainen, avoin, mainosvapaa ja yksityisyyttä kunnioittava hintatarjouspohjan generoija",
+    "icons": [
+        {
+          "src": "icons-192.png",
+          "type": "image/png",
+          "sizes": "192x192"
+        },
+        {
+          "src": "icons-512.png",
+          "type": "image/png",
+          "sizes": "512x512"
+        }
+      ],
+    "theme_color": "#5dadec",
+    "background_color": "#ffffff",
+    "display": "browser",
+    "scope": "/",
+    "start_url": "/"
+  }
