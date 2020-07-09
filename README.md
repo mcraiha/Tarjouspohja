@@ -4,6 +4,10 @@ Selaimessa toimiva interaktiivinen HTML5/CSS/Javascript/Typescript -työkalu tar
 # Osoite
 [tarjous.raiha.rocks](https://tarjous.raiha.rocks/)
 
+# Kuinka työstän?
+
+Tärkeimmät osat ovat [index.html](src/index.html) - ja [index.ts](src/index.ts) -tiedostot. Jos haluat kääntää index.ts-tiedostosta tarvittavan **index.js**-tiedoston, täytyy sinun ajaa Typescript kääntäjä (`tsc`) src-kansiossa, jolloin index.js generoituu **src/dist** -kansioon.
+
 # Lisenssi
 
 Koodin lisenssi (*.ts-, *.js- ja *.bash-tiedostot) on **The Unlicense**, katso [LICENSE](https://github.com/mcraiha/Tarjouspohja/blob/master/LICENSE)
