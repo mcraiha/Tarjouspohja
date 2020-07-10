@@ -145,6 +145,16 @@ if (suomenalv) {
     suomenalvInput.addEventListener('input', paivitaJosUrlAnnettu);
 }
 
+const osoiteParametrit: string = window.location.search;
+console.log( window.location.search);
+const parametrit: URLSearchParams = new URLSearchParams(osoiteParametrit);
+
+if (parametrit.has('url')) {
+    const urlOsa: string = parametrit.get('url')!;
+    lueUrlParametriJaAsetaOsoite(urlOsa);
+    generoi();
+}
+
 taydennaBuildiTiedot('builditiedot', buildDate, gitShortHash);
 
 /** 
@@ -539,6 +549,12 @@ export function httpLisaykset(nakyviin: boolean): void {
 export function veroerolaskuri(nakyviin: boolean): void {
     const veroerolaskurivanhempi: HTMLElement = document.getElementById('veroerolaskurivanhempi')!;
     veroerolaskurivanhempi.hidden = !nakyviin;
+}
+
+export function lueUrlParametriJaAsetaOsoite(urlOsa: string): void {
+    const varsinainenUrl: string = decodeURIComponent(urlOsa);
+    const tarjousosoiteInput = <HTMLInputElement>tarjousosoite;
+    tarjousosoiteInput.value = varsinainenUrl;
 }
 
 export function taydennaBuildiTiedot(elementinNimi: string, paiva: string, shortHash: string): void {
