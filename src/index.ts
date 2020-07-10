@@ -57,7 +57,9 @@ const kaupat: ReadonlyArray<KauppojenMaaritykset> = [
     { kauppa: Verkkokauppa.XXL, nimi: "XXL", urlit: ["www.xxl.fi", "xxl.fi"], naytaVeroerolaskuri: false, hintamuokkaus: eiHintamuokkausta},
 ]
 
-// Alustus
+/** 
+ * Alustus alkaa
+ */
 if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('sw.js');
 }
@@ -145,7 +147,9 @@ if (suomenalv) {
 
 taydennaBuildiTiedot('builditiedot', buildDate, gitShortHash);
 
-// Alustus päättyy
+/** 
+ * Alustus päättyy
+ */
 
 export function tarkistaUrl(event: Event): void {
     const annettuOsoite: string = (<HTMLInputElement>event.target).value;
