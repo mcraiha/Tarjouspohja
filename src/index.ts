@@ -146,7 +146,6 @@ if (suomenalv) {
 }
 
 const osoiteParametrit: string = window.location.search;
-console.log( window.location.search);
 const parametrit: URLSearchParams = new URLSearchParams(osoiteParametrit);
 
 if (parametrit.has('url')) {
