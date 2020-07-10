@@ -151,7 +151,7 @@ const parametrit: URLSearchParams = new URLSearchParams(osoiteParametrit);
 
 if (parametrit.has('url')) {
     const urlOsa: string = parametrit.get('url')!;
-    lueUrlParametriJaAsetaOsoite(urlOsa);
+    lueUrlParametriJaAsetaOsoite(teeTurvallinenTeksti(urlOsa));
     generoi();
 }
 
