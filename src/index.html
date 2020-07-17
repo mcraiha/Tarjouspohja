@@ -83,10 +83,18 @@
       <section>
         <form>
           <header>
-            <h3 title="BB Code tageja käytetään useilla foorumeilla">BB Code:</h3>
+            <h3><a href="#" id="bbcodelinkki" title="BB Code tageja käytetään useilla foorumeilla">BB Code</a> / <a href="#" id="markdownlinkki" title="Markdown on käytössä useissa chat-ohjelmissa, esim. Discord">Markdown</a></h3>
           </header>
-          <textarea rows="9" cols="60" id="bbkoodi" readonly>BB Code generoituu tähän</textarea>    
-          <button type="button" id="kopioibb" disabled>Kopioi BB code ✂️</button>
+
+          <fieldset id="bbcodevanhempi">
+            <textarea rows="9" cols="60" id="bbkoodi" readonly>BB Code generoituu tähän</textarea>    
+            <button type="button" id="kopioibb" disabled>Kopioi BB code ✂️</button>
+          </fieldset>
+
+          <fieldset id="markdownvanhempi" hidden>
+            <textarea rows="9" cols="60" id="markdownkoodi" readonly>Markdown generoituu tähän</textarea>    
+            <button type="button" id="kopioimarkdown" disabled>Kopioi Markdown ✂️</button>
+          </fieldset>
         </form>
       </section>      
 

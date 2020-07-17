@@ -27,6 +27,26 @@ enum Verkkokauppa {
     XXL,
 }
 
+enum ValittuUlostulo {
+    EiValintaa,
+
+    BBCode,
+    Markdown
+}
+
+interface UlostuloMaaritykset {
+    valinta: ValittuUlostulo;
+    elementinVanhempiId: string;
+    elementinTekstiId: string;
+    elementinKopioNappiId: string;
+    luoUlostulo: (tuote: string, osoite: string, kauppa: string, voimassa: string, hinta: string, promokoodi: string) => string;
+}
+
+const ulostulot: ReadonlyArray<UlostuloMaaritykset> = [
+    { valinta: ValittuUlostulo.BBCode, elementinVanhempiId: "bbcodevanhempi", elementinTekstiId: "bbkoodi", elementinKopioNappiId: "kopioibb", luoUlostulo: generoiBBCode },
+    { valinta: ValittuUlostulo.Markdown, elementinVanhempiId: "markdownvanhempi", elementinTekstiId: "markdownkoodi", elementinKopioNappiId: "kopioimarkdown", luoUlostulo: generoiMarkdown },
+]
+
 interface KauppojenMaaritykset {
     kauppa: Verkkokauppa;
     nimi: string;
@@ -121,6 +141,12 @@ if (kopioibbNappi) {
     kopioibbInput.onclick = kopioiBB;
 }
 
+const kopioimarkdownNappi: HTMLElement = document.getElementById('kopioimarkdown')!;
+if (kopioimarkdownNappi) {
+    const kopioimarkdownNappiInput = <HTMLInputElement>kopioimarkdownNappi;
+    kopioimarkdownNappiInput.onclick = kopioiMarkdown;
+}
+
 const httpsNappi: HTMLElement = document.getElementById('lisaahttps')!;
 if (httpsNappi) {
     const httpsNappiInput = <HTMLInputElement>httpsNappi;
@@ -143,6 +169,18 @@ const suomenalv: HTMLElement = document.getElementById('suomenalv')!;
 if (suomenalv) {
     const suomenalvInput = <HTMLInputElement>suomenalv;
     suomenalvInput.addEventListener('input', paivitaJosUrlAnnettu);
+}
+
+const bbCodeLinkki: HTMLElement = document.getElementById('bbcodelinkki')!;
+if (bbCodeLinkki) {
+    const bbCodeLinkkiInput = <HTMLInputElement>bbCodeLinkki;
+    bbCodeLinkkiInput.addEventListener('click', () => naytaValittuUlostuloOsio("bbcodevanhempi"));
+}
+
+const markdownLinkki: HTMLElement = document.getElementById('markdownlinkki')!;
+if (markdownLinkki) {
+    const markdownLinkkiInput = <HTMLInputElement>markdownLinkki;
+    markdownLinkkiInput.addEventListener('click', () => naytaValittuUlostuloOsio("markdownvanhempi"));
 }
 
 const osoiteParametrit: string = window.location.search;
@@ -185,6 +223,13 @@ export function kopioiBB(): void {
     const bbKoodi: HTMLElement = document.getElementById('bbkoodi')!;
     const bbKoodiInput = <HTMLInputElement>bbKoodi;
     bbKoodiInput.select();
+    document.execCommand("copy");
+}
+
+export function kopioiMarkdown(): void {
+    const markdownKoodi: HTMLElement = document.getElementById('markdownkoodi')!;
+    const markdownKoodiInput = <HTMLInputElement>markdownKoodi;
+    markdownKoodiInput.select();
     document.execCommand("copy");
 }
 
@@ -359,13 +404,10 @@ export function generoi(): void {
     const promokoodiInput = <HTMLInputElement>promokoodi;
     const turvallinenPromokoodi: string = teeTurvallinenTeksti(promokoodiInput.value);
 
-    const bbKoodi: HTMLElement = document.getElementById('bbkoodi')!;
-    const bbKoodiInput = <HTMLInputElement>bbKoodi;
-    bbKoodiInput.value = generoiBBCode(turvallinenTarjousTuote, turvallinenTarjousOsoite, kaupanNimi, voimassa, hinta, turvallinenPromokoodi);
+    const valittuUlosTulo = etsiValittuUlostulo();
+    kirjoitaValittuUlostulo(valittuUlosTulo, turvallinenTarjousTuote, turvallinenTarjousOsoite, kaupanNimi, voimassa, hinta, turvallinenPromokoodi);
 
-    const kopioibbNappi: HTMLElement = document.getElementById('kopioibb')!;
-    const kopioibbInput = <HTMLInputElement>kopioibbNappi;
-    kopioibbInput.disabled = false;
+    laitaUlostulonKopionappiPaalle(valittuUlosTulo);
 
     const visuaalinen: HTMLElement = document.getElementById('visuaalinen')!;
     visuaalinen.innerHTML = generoiVisuaalinen(turvallinenTarjousTuote, turvallinenTarjousOsoite, kaupanNimi, voimassa, hinta, turvallinenPromokoodi);
@@ -377,6 +419,16 @@ export function generoiBBCode(tuote: string, osoite: string, kauppa: string, voi
 
     if (promokoodi !== null && promokoodi.length > 0) {
         osatArray.push(`[b]Promokoodi:[/b] ${promokoodi}`);
+    }
+
+    return osatArray.join("\r\n");
+}
+
+export function generoiMarkdown(tuote: string, osoite: string, kauppa: string, voimassa: string, hinta: string, promokoodi: string): string {
+    const osatArray = new Array(`**Tuote:** ${tuote}`, `**Hinta:** ${hinta}`, `**Kauppa:** ${kauppa}`, `**Voimassa:** ${voimassa}`, `**Linkki:** ${osoite}`);
+
+    if (promokoodi !== null && promokoodi.length > 0) {
+        osatArray.push(`**Promokoodi:** ${promokoodi}`);
     }
 
     return osatArray.join("\r\n");
@@ -554,6 +606,54 @@ export function lueUrlParametriJaAsetaOsoite(urlOsa: string): void {
     const varsinainenUrl: string = decodeURIComponent(urlOsa);
     const tarjousosoiteInput = <HTMLInputElement>tarjousosoite;
     tarjousosoiteInput.value = varsinainenUrl;
+}
+
+export function etsiValittuUlostulo(): ValittuUlostulo {
+    for (const ulostulo of ulostulot) {
+        const htmlElementti : HTMLElement = document.getElementById(ulostulo.elementinVanhempiId)!;
+        if (!htmlElementti.hidden) {
+            return ulostulo.valinta;
+        }
+    }
+
+    return ValittuUlostulo.EiValintaa;
+}
+
+export function kirjoitaValittuUlostulo(valittuUlostulo: ValittuUlostulo, tuote: string, osoite: string, kauppa: string, voimassa: string, hinta: string, promokoodi: string): void {
+    for (const ulostulo of ulostulot) {
+        if (ulostulo.valinta === valittuUlostulo) {
+            const valittuUlostuloElementti: HTMLElement = document.getElementById(ulostulo.elementinTekstiId)!;
+            const ulostuloInput = <HTMLInputElement>valittuUlostuloElementti;
+            ulostuloInput.value = ulostulo.luoUlostulo(tuote, osoite, kauppa, voimassa, hinta, promokoodi);
+            return;
+        }
+    }
+}
+
+export function naytaValittuUlostuloOsio(ulostulonVanhempi: string): void {
+    for (const ulostulo of ulostulot) {
+        if (ulostulo.elementinVanhempiId === ulostulonVanhempi) {
+            const nakyviin: HTMLElement = document.getElementById(ulostulo.elementinVanhempiId)!;
+            nakyviin.hidden = false;
+        }
+        else {
+            const piiloon: HTMLElement = document.getElementById(ulostulo.elementinVanhempiId)!;
+            piiloon.hidden = true;
+        }
+    }
+
+    generoi();
+}
+
+export function laitaUlostulonKopionappiPaalle(valittuUlostulo: ValittuUlostulo): void {
+    for (const ulostulo of ulostulot) {
+        if (ulostulo.valinta === valittuUlostulo) {
+            const kopioiNappi: HTMLElement = document.getElementById(ulostulo.elementinKopioNappiId)!;
+            const kopioiInput = <HTMLInputElement>kopioiNappi;
+            kopioiInput.disabled = false;
+            return;
+        }
+    }
 }
 
 export function taydennaBuildiTiedot(elementinNimi: string, paiva: string, shortHash: string): void {
