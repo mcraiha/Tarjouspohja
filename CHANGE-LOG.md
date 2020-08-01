@@ -1,3 +1,8 @@
+## Versio 0.9.7 (julkaistu 2020-08-01)
+- CSS-korjauksia
+- ES2015-muotoista Javascriptia
+- Maatiedot kaikille kaupoille
+
 ## Versio 0.9.6 (julkaistu 2020-07-17)
 - Markdown-tuki mukaan
 
