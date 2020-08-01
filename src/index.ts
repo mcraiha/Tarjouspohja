@@ -27,12 +27,32 @@ enum Verkkokauppa {
     XXL,
 }
 
+enum Maa {
+    Tunnistamaton,
+
+    Suomi,
+    Saksa
+}
+
 enum ValittuUlostulo {
     EiValintaa,
 
     BBCode,
     Markdown
 }
+
+interface MaaMaaritykset {
+    maa: Maa;
+    emojiLippu: string;
+    genetiivi: string;
+}
+
+const maat: ReadonlyArray<MaaMaaritykset> = [
+    { maa: Maa.Suomi, emojiLippu: "🇫🇮", genetiivi: "Suomen" },
+    { maa: Maa.Saksa, emojiLippu: "🇩🇪", genetiivi: "Saksan" },
+
+    { maa: Maa.Tunnistamaton, emojiLippu: "🏳️", genetiivi: "Tuntemattoman" }
+]
 
 interface UlostuloMaaritykset {
     valinta: ValittuUlostulo;
@@ -51,30 +71,31 @@ interface KauppojenMaaritykset {
     kauppa: Verkkokauppa;
     nimi: string;
     urlit: ReadonlyArray<string>;
+    maa: Maa; // Maa ALV:in laskemista varten
     naytaVeroerolaskuri: boolean;
     hintamuokkaus: (hinta: string) => string;
 }
 
 const kaupat: ReadonlyArray<KauppojenMaaritykset> = [
-    { kauppa: Verkkokauppa.AmazonDOTde, nimi: "Amazon.de", urlit: ["www.amazon.de", "amazon.de"], naytaVeroerolaskuri: true, hintamuokkaus: eiHintamuokkausta},
-    { kauppa: Verkkokauppa.CDON, nimi: "CDON", urlit: ["cdon.fi"], naytaVeroerolaskuri: false, hintamuokkaus: eiHintamuokkausta},
-    { kauppa: Verkkokauppa.ClasOhlson, nimi: "Clas Ohlson", urlit: ["www.clasohlson.com", "clasohlson.com"], naytaVeroerolaskuri: false, hintamuokkaus: eiHintamuokkausta},
-    { kauppa: Verkkokauppa.DNA, nimi: "DNA", urlit: ["kauppa4.dna.fi", "dna.fi"], naytaVeroerolaskuri: false, hintamuokkaus: eiHintamuokkausta},
-    { kauppa: Verkkokauppa.DustinHomeDOTfi, nimi: "DustinHome.fi", urlit: ["www.dustinhome.fi", "dustinhome.fi"], naytaVeroerolaskuri: false, hintamuokkaus: eiHintamuokkausta},
-    { kauppa: Verkkokauppa.Elisa, nimi: "Elisa", urlit: ["elisa.fi"], naytaVeroerolaskuri: false, hintamuokkaus: eiHintamuokkausta},
-    { kauppa: Verkkokauppa.Gigantti, nimi: "Gigantti", urlit: ["www.gigantti.fi", "gigantti.fi"], naytaVeroerolaskuri: false, hintamuokkaus: eiHintamuokkausta},
-    { kauppa: Verkkokauppa.Jimms, nimi: "Jimm's PC-Store", urlit: ["www.jimms.fi", "jimms.fi"], naytaVeroerolaskuri: false, hintamuokkaus: eiHintamuokkausta},
-    { kauppa: Verkkokauppa.Karkkainen, nimi: "Kärkkäinen", urlit: ["www.karkkainen.com", "karkkainen.com"], naytaVeroerolaskuri: false, hintamuokkaus: eiHintamuokkausta},
-    { kauppa: Verkkokauppa.KomponenttikauppaDOTfi, nimi: "Komponenttikauppa.fi", urlit: ["komponenttikauppa.fi"], naytaVeroerolaskuri: false, hintamuokkaus: eiHintamuokkausta},
-    { kauppa: Verkkokauppa.Multitronic, nimi: "Multitronic", urlit: ["www.multitronic.fi", "multitronic.fi"], naytaVeroerolaskuri: false, hintamuokkaus: eiHintamuokkausta},
-    { kauppa: Verkkokauppa.Power, nimi: "Power", urlit: ["www.power.fi", "power.fi"], naytaVeroerolaskuri: false, hintamuokkaus: eiHintamuokkausta},
-    { kauppa: Verkkokauppa.Proshop, nimi: "Proshop", urlit: ["www.proshop.fi", "proshop.fi"], naytaVeroerolaskuri: false, hintamuokkaus: eiHintamuokkausta},
-    { kauppa: Verkkokauppa.Tehorauta, nimi: "Tehorauta", urlit: ["www.tehorauta.fi", "tehorauta.fi"], naytaVeroerolaskuri: false, hintamuokkaus: eiHintamuokkausta},
-    { kauppa: Verkkokauppa.Telia, nimi: "Telia", urlit: ["kauppa.telia.fi", "telia.fi"], naytaVeroerolaskuri: false, hintamuokkaus: eiHintamuokkausta},
-    { kauppa: Verkkokauppa.TietokonekauppaDOTfi, nimi: "Tietokonekauppa.fi", urlit: ["www.tietokonekauppa.fi", "tietokonekauppa.fi"], naytaVeroerolaskuri: false, hintamuokkaus: eiHintamuokkausta},
-    { kauppa: Verkkokauppa.VeikonKone, nimi: "Veikon Kone", urlit: ["www.veikonkone.fi", "veikonkone.fi"], naytaVeroerolaskuri: false, hintamuokkaus: eiHintamuokkausta},
-    { kauppa: Verkkokauppa.VerkkokauppaDOTcom, nimi: "Verkkokauppa.com", urlit: ["www.verkkokauppa.com", "verkkokauppa.com"], naytaVeroerolaskuri: false, hintamuokkaus: eiHintamuokkausta},
-    { kauppa: Verkkokauppa.XXL, nimi: "XXL", urlit: ["www.xxl.fi", "xxl.fi"], naytaVeroerolaskuri: false, hintamuokkaus: eiHintamuokkausta},
+    { kauppa: Verkkokauppa.AmazonDOTde, nimi: "Amazon.de", urlit: ["www.amazon.de", "amazon.de"], maa: Maa.Saksa, naytaVeroerolaskuri: true, hintamuokkaus: eiHintamuokkausta},
+    { kauppa: Verkkokauppa.CDON, nimi: "CDON", urlit: ["cdon.fi"], maa: Maa.Suomi, naytaVeroerolaskuri: false, hintamuokkaus: eiHintamuokkausta},
+    { kauppa: Verkkokauppa.ClasOhlson, nimi: "Clas Ohlson", urlit: ["www.clasohlson.com", "clasohlson.com"], maa: Maa.Suomi, naytaVeroerolaskuri: false, hintamuokkaus: eiHintamuokkausta},
+    { kauppa: Verkkokauppa.DNA, nimi: "DNA", urlit: ["kauppa4.dna.fi", "dna.fi"], maa: Maa.Suomi, naytaVeroerolaskuri: false, hintamuokkaus: eiHintamuokkausta},
+    { kauppa: Verkkokauppa.DustinHomeDOTfi, nimi: "DustinHome.fi", urlit: ["www.dustinhome.fi", "dustinhome.fi"], maa: Maa.Suomi, naytaVeroerolaskuri: false, hintamuokkaus: eiHintamuokkausta},
+    { kauppa: Verkkokauppa.Elisa, nimi: "Elisa", urlit: ["elisa.fi"], maa: Maa.Suomi, naytaVeroerolaskuri: false, hintamuokkaus: eiHintamuokkausta},
+    { kauppa: Verkkokauppa.Gigantti, nimi: "Gigantti", urlit: ["www.gigantti.fi", "gigantti.fi"], maa: Maa.Suomi, naytaVeroerolaskuri: false, hintamuokkaus: eiHintamuokkausta},
+    { kauppa: Verkkokauppa.Jimms, nimi: "Jimm's PC-Store", urlit: ["www.jimms.fi", "jimms.fi"], maa: Maa.Suomi, naytaVeroerolaskuri: false, hintamuokkaus: eiHintamuokkausta},
+    { kauppa: Verkkokauppa.Karkkainen, nimi: "Kärkkäinen", urlit: ["www.karkkainen.com", "karkkainen.com"], maa: Maa.Suomi, naytaVeroerolaskuri: false, hintamuokkaus: eiHintamuokkausta},
+    { kauppa: Verkkokauppa.KomponenttikauppaDOTfi, nimi: "Komponenttikauppa.fi", urlit: ["komponenttikauppa.fi"], maa: Maa.Suomi, naytaVeroerolaskuri: false, hintamuokkaus: eiHintamuokkausta},
+    { kauppa: Verkkokauppa.Multitronic, nimi: "Multitronic", urlit: ["www.multitronic.fi", "multitronic.fi"], maa: Maa.Suomi, naytaVeroerolaskuri: false, hintamuokkaus: eiHintamuokkausta},
+    { kauppa: Verkkokauppa.Power, nimi: "Power", urlit: ["www.power.fi", "power.fi"], maa: Maa.Suomi, naytaVeroerolaskuri: false, hintamuokkaus: eiHintamuokkausta},
+    { kauppa: Verkkokauppa.Proshop, nimi: "Proshop", urlit: ["www.proshop.fi", "proshop.fi"], maa: Maa.Suomi, naytaVeroerolaskuri: false, hintamuokkaus: eiHintamuokkausta},
+    { kauppa: Verkkokauppa.Tehorauta, nimi: "Tehorauta", urlit: ["www.tehorauta.fi", "tehorauta.fi"], maa: Maa.Suomi, naytaVeroerolaskuri: false, hintamuokkaus: eiHintamuokkausta},
+    { kauppa: Verkkokauppa.Telia, nimi: "Telia", urlit: ["kauppa.telia.fi", "telia.fi"], maa: Maa.Suomi, naytaVeroerolaskuri: false, hintamuokkaus: eiHintamuokkausta},
+    { kauppa: Verkkokauppa.TietokonekauppaDOTfi, nimi: "Tietokonekauppa.fi", urlit: ["www.tietokonekauppa.fi", "tietokonekauppa.fi"], maa: Maa.Suomi, naytaVeroerolaskuri: false, hintamuokkaus: eiHintamuokkausta},
+    { kauppa: Verkkokauppa.VeikonKone, nimi: "Veikon Kone", urlit: ["www.veikonkone.fi", "veikonkone.fi"], maa: Maa.Suomi, naytaVeroerolaskuri: false, hintamuokkaus: eiHintamuokkausta},
+    { kauppa: Verkkokauppa.VerkkokauppaDOTcom, nimi: "Verkkokauppa.com", urlit: ["www.verkkokauppa.com", "verkkokauppa.com"], maa: Maa.Suomi, naytaVeroerolaskuri: false, hintamuokkaus: eiHintamuokkausta},
+    { kauppa: Verkkokauppa.XXL, nimi: "XXL", urlit: ["www.xxl.fi", "xxl.fi"], maa: Maa.Suomi, naytaVeroerolaskuri: false, hintamuokkaus: eiHintamuokkausta},
 ]
 
 /** 
@@ -275,12 +296,12 @@ export function muokkaaHintaaTarvittaessa(verkkokauppa: Verkkokauppa, hinta: str
 export function naytaVeroerolaskuriTarvittaessa(verkkokauppa: Verkkokauppa): void {
     for (const kauppa of kaupat) {
         if (kauppa.kauppa === verkkokauppa && kauppa.naytaVeroerolaskuri) {
-            veroerolaskuri(true);
+            veroerolaskuri(true, kauppa.maa);
             return;
         }
     }
 
-    veroerolaskuri(false);
+    veroerolaskuri(false, Maa.Tunnistamaton);
 }
 
 export function onkoVeroerolaskuriKaytossa(): boolean {
@@ -597,9 +618,25 @@ export function httpLisaykset(nakyviin: boolean): void {
     httpNappi.hidden = !nakyviin;
 }
 
-export function veroerolaskuri(nakyviin: boolean): void {
+export function veroerolaskuri(nakyviin: boolean, maa: Maa): void {
     const veroerolaskurivanhempi: HTMLElement = document.getElementById('veroerolaskurivanhempi')!;
     veroerolaskurivanhempi.hidden = !nakyviin;
+
+    if (nakyviin) {
+        const kohdemaanalvteksti: HTMLElement = document.getElementById('kohdemaanalvteksti')!;
+        const maaMaaritys: MaaMaaritykset = etsiMaaMaaritys(maa);
+        kohdemaanalvteksti.innerText = `${maaMaaritys.genetiivi} ALV %`;
+    }
+}
+
+export function etsiMaaMaaritys(maa: Maa): MaaMaaritykset {
+    for (const maaMaaritys of maat) {
+        if (maaMaaritys.maa === maa) {
+            return maaMaaritys;
+        }
+    }
+
+    return maat[maat.length - 1];
 }
 
 export function lueUrlParametriJaAsetaOsoite(urlOsa: string): void {
