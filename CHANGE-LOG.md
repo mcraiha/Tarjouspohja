@@ -1,3 +1,7 @@
+## Versio 0.9.8 (julkaistu 2020-12-27)
+- Pari uutta kauppaa
+- Ref/tag-varoitus Amazon.de
+
 ## Versio 0.9.7 (julkaistu 2020-08-01)
 - CSS-korjauksia
 - ES2015-muotoista Javascriptia
