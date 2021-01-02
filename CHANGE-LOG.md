@@ -1,3 +1,6 @@
+## Versio 0.9.9 (julkaistu 2020-12-27)
+- Saksan ALV takaisin 19%
+
 ## Versio 0.9.8 (julkaistu 2020-12-27)
 - Pari uutta kauppaa
 - Ref/tag-varoitus Amazon.de
