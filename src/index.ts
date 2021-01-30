@@ -738,5 +738,5 @@ export function naytaRefLinkkiVaroitusTarvittaessa(paalla: boolean): void {
 
 export function taydennaBuildiTiedot(elementinNimi: string, paiva: string, shortHash: string): void {
     const buildiElementti: HTMLElement = document.getElementById(elementinNimi)!;
-    buildiElementti.innerHTML = `${paiva} <a href="https://github.com/mcraiha/Tarjouspohja/commit/${shortHash}">#${shortHash}</a>`;
+    buildiElementti.innerHTML = `<time datetime="${paiva}">${paiva}</time> <a href="https://github.com/mcraiha/Tarjouspohja/commit/${shortHash}">#${shortHash}</a>`;
 }
