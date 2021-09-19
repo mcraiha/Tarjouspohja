@@ -18,5 +18,14 @@
     "background_color": "#ffffff",
     "display": "standalone",
     "scope": "/",
-    "start_url": "/"
+    "start_url": "/",
+    "orientation": "portrait",
+    "categories": ["generator", "deal"],
+    "shortcuts" : [
+      {
+        "name": "Tietoja",
+        "url": "/tietoja.html",
+        "description": "Tietoja"
+      }
+    ]
   }
