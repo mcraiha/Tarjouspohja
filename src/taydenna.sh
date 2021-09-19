@@ -1,7 +1,7 @@
 #!/bin/bash
 # Täydentää muuttujat
 current_date=$(date --iso-8601=minutes)
-tsc_version=$(tsc --version)
+tsc_version=$(deno eval "console.log(Deno.version.typescript)")
 git_short_hash=$(git rev-parse --short HEAD)
 
 echo $current_date

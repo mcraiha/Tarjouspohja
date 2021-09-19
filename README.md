@@ -6,7 +6,12 @@ Selaimessa toimiva interaktiivinen HTML5/CSS/Javascript/Typescript -työkalu tar
 
 # Kuinka työstän?
 
-Tärkeimmät osat ovat [index.html](src/index.html) - ja [index.ts](src/index.ts) -tiedostot. Jos haluat kääntää index.ts-tiedostosta tarvittavan **index.js**-tiedoston, täytyy sinun ajaa Typescript kääntäjä (`tsc`) src-kansiossa, jolloin index.js generoituu **src/dist** -kansioon.
+Tärkeimmät osat ovat [index.html](src/index.html) - ja [index.ts](src/index.ts) -tiedostot. Jos haluat kääntää index.ts-tiedostosta tarvittavan **index.js**-tiedoston, täytyy sinun ajaa Typescript kääntäjä (`tsc` tai `deno`) src-kansiossa, jolloin index.js generoituu valittuun kansioon.
+
+Koko paketin saa denon kanssa tehtyä ajamalla seuraavan skriptin
+```bash
+kokokaannos.sh
+```
 
 # Lisenssi
 
@@ -14,4 +19,4 @@ Koodin lisenssi (*.ts-, *.js- ja *.bash-tiedostot) on **The Unlicense**, katso [
 
 CSS-tyylitiedoston ([mvp.css](src/mvp.css)) lisenssi on [MIT-lisenssi](https://fi.wikipedia.org/wiki/MIT-lisenssi)
 
-Ikonitiedostot ([big_icon.png](big_icon.png) ja [favicon.ico](src/favicon.ico)) kuuluvat [CC-BY 4.0](https://creativecommons.org/licenses/by/4.0/) -lisenssin alle, koska ikoni koostuu 💻 ja 💶 emojeista joiden kuvat ovat osa [Twitter Emoji (Twemoji)](https://github.com/twitter/twemoji) -projektia.
+Ikonitiedostot ([big_icon.png](big_icon.png) ja [favicon.ico](src/favicon.ico)) kuuluvat [CC-BY 4.0](https://creativecommons.org/licenses/by/4.0/) -lisenssin alle, koska ikoni koostuu 💻 - ja 💶 -emojeista, joiden kuvat ovat osa [Twitter Emoji (Twemoji)](https://github.com/twitter/twemoji) -projektia.
