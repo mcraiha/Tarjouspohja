@@ -1,0 +1,5 @@
+[{
+      "relation": ["delegate_permission/common.handle_all_urls"],
+      "target" : { "namespace": "android_app", "package_name": "rocks.raiha.tarjous",
+                   "sha256_cert_fingerprints": ["D4:F6:4A:DC:C4:7E:69:1B:C1:4C:E2:9C:8B:6D:15:A4:C0:D1:09:D7:F4:97:A8:FC:06:3D:B2:39:1A:D7:9E:1C"] }
+    }]
