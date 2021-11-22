@@ -1,7 +1,7 @@
 // Service worker
 
 // Välimuistin nimi, versionumeroa kasvatetaan päivityksien yhteydessä
-const PRECACHE = 'v7';
+const PRECACHE = 'v8';
 
 // Lista URL:eista, jotka otetaan aina alussa välimuistiin
 const PRECACHE_URLS = [
