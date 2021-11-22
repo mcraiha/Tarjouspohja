@@ -62,7 +62,7 @@ interface UlostuloMaaritykset {
     elementinVanhempiId: string;
     elementinTekstiId: string;
     elementinKopioNappiId: string;
-    luoUlostulo: (tuote: string, osoite: string, kauppa: string, voimassa: string, hinta: string, promokoodi: string) => string;
+    luoUlostulo: (tuote: string, osoite: string, kauppa: string, voimassa: string, hinta: string, promokoodi: string, kommentti: string) => string;
     luoOtsikko: (tuote: string, osoite: string, kauppa: string, voimassa: string, hinta: string, promokoodi: string) => string;
 }
 
@@ -139,6 +139,13 @@ if (promokoodi) {
     const promokoodiInput = <HTMLInputElement>promokoodi;
     promokoodiInput.disabled = false;
     promokoodi.addEventListener('input', paivitaJosUrlAnnettu);
+}
+
+const kommenttitarjouksesta: HTMLElement = document.getElementById('kommenttitarjouksesta')!;
+if (kommenttitarjouksesta) {
+    const kommenttitarjouksestaInput = <HTMLInputElement>kommenttitarjouksesta;
+    kommenttitarjouksestaInput.disabled = false;
+    kommenttitarjouksesta.addEventListener('input', paivitaJosUrlAnnettu);
 }
 
 laitaRadiotPaalle('valuutta');
@@ -446,8 +453,12 @@ export function generoi(): void {
     const promokoodiInput = <HTMLInputElement>promokoodi;
     const turvallinenPromokoodi: string = teeTurvallinenTeksti(promokoodiInput.value);
 
+    const kommenttitarjouksesta: HTMLElement = document.getElementById('kommenttitarjouksesta')!;
+    const kommenttitarjouksestaInput = <HTMLInputElement>kommenttitarjouksesta;
+    const turvallinenkommenttitarjouksesta: string = teeTurvallinenTeksti(kommenttitarjouksestaInput.value);
+
     const valittuUlosTulo = etsiValittuUlostulo();
-    kirjoitaValittuUlostulo(valittuUlosTulo, turvallinenTarjousTuote, turvallinenTarjousOsoite, kaupanNimi, voimassa, hinta, turvallinenPromokoodi);
+    kirjoitaValittuUlostulo(valittuUlosTulo, turvallinenTarjousTuote, turvallinenTarjousOsoite, kaupanNimi, voimassa, hinta, turvallinenPromokoodi, turvallinenkommenttitarjouksesta);
 
     laitaUlostulonKopionappiPaalle(valittuUlosTulo);
 
@@ -455,14 +466,14 @@ export function generoi(): void {
     visuaalinenTuoteOtsikko.innerHTML = generoiOtsikko(turvallinenTarjousTuote, turvallinenTarjousOsoite, kaupanNimi, voimassa, hinta);
 
     const visuaalinen: HTMLElement = document.getElementById('visuaalinen')!;
-    visuaalinen.innerHTML = generoiVisuaalinen(turvallinenTarjousTuote, turvallinenTarjousOsoite, kaupanNimi, voimassa, hinta, turvallinenPromokoodi);
+    visuaalinen.innerHTML = generoiVisuaalinen(turvallinenTarjousTuote, turvallinenTarjousOsoite, kaupanNimi, voimassa, hinta, turvallinenPromokoodi, turvallinenkommenttitarjouksesta);
 }
 
 export function generoiOtsikko(tuote: string, osoite: string, kauppa: string, voimassa: string, hinta: string): string {
     return `${tuote}, ${kauppa}, ${hinta}`;
 }
 
-export function generoiBBCode(tuote: string, osoite: string, kauppa: string, voimassa: string, hinta: string, promokoodi: string): string {
+export function generoiBBCode(tuote: string, osoite: string, kauppa: string, voimassa: string, hinta: string, promokoodi: string, kommentti: string): string {
 
     const osatArray = new Array(`[b]Tuote:[/b] ${tuote}`, `[b]Hinta:[/b] ${hinta}`, `[b]Kauppa:[/b] ${kauppa}`, `[b]Voimassa:[/b] ${voimassa}`, `[b]Linkki:[/b] ${osoite}`);
 
@@ -470,25 +481,37 @@ export function generoiBBCode(tuote: string, osoite: string, kauppa: string, voi
         osatArray.push(`[b]Promokoodi:[/b] ${promokoodi}`);
     }
 
+    if (kommentti !== null && kommentti.length > 0) {
+        osatArray.push(`[b]Kommentti tarjouksesta:[/b] ${kommentti}`);
+    }
+
     return osatArray.join("\r\n");
 }
 
-export function generoiMarkdown(tuote: string, osoite: string, kauppa: string, voimassa: string, hinta: string, promokoodi: string): string {
+export function generoiMarkdown(tuote: string, osoite: string, kauppa: string, voimassa: string, hinta: string, promokoodi: string, kommentti: string): string {
     const osatArray = new Array(`**Tuote:** ${tuote}`, `**Hinta:** ${hinta}`, `**Kauppa:** ${kauppa}`, `**Voimassa:** ${voimassa}`, `**Linkki:** ${osoite}`);
 
     if (promokoodi !== null && promokoodi.length > 0) {
         osatArray.push(`**Promokoodi:** ${promokoodi}`);
     }
 
+    if (kommentti !== null && kommentti.length > 0) {
+        osatArray.push(`**Kommentti tarjouksesta:** ${kommentti}`);
+    }
+
     return osatArray.join("\r\n");
 }
 
-export function generoiVisuaalinen(tuote: string, osoite: string, kauppa: string, voimassa: string, hinta: string, promokoodi: string): string {
+export function generoiVisuaalinen(tuote: string, osoite: string, kauppa: string, voimassa: string, hinta: string, promokoodi: string, kommentti: string): string {
 
     const osatArray = new Array(`<b>Tuote:</b> ${tuote}`, `<b>Hinta:</b> ${hinta}`, `<b>Kauppa:</b> ${kauppa}`, `<b>Voimassa:</b> ${voimassa}`, `<b>Linkki:</b> <a href="${osoite}">${osoite}</a>`);
 
     if (promokoodi !== null && promokoodi.length > 0) {
         osatArray.push(`<b>Promokoodi:</b> ${promokoodi}`);
+    }
+
+    if (kommentti !== null && kommentti.length > 0) {
+        osatArray.push(`<b>Kommentti tarjouksesta:</b> ${kommentti}`);
     }
 
     return osatArray.join("<br>");
@@ -684,12 +707,12 @@ export function etsiValittuUlostulo(): ValittuUlostulo {
     return ValittuUlostulo.EiValintaa;
 }
 
-export function kirjoitaValittuUlostulo(valittuUlostulo: ValittuUlostulo, tuote: string, osoite: string, kauppa: string, voimassa: string, hinta: string, promokoodi: string): void {
+export function kirjoitaValittuUlostulo(valittuUlostulo: ValittuUlostulo, tuote: string, osoite: string, kauppa: string, voimassa: string, hinta: string, promokoodi: string, kommentti: string): void {
     for (const ulostulo of ulostulot) {
         if (ulostulo.valinta === valittuUlostulo) {
             const valittuUlostuloElementti: HTMLElement = document.getElementById(ulostulo.elementinTekstiId)!;
             const ulostuloInput = <HTMLInputElement>valittuUlostuloElementti;
-            ulostuloInput.value = ulostulo.luoUlostulo(tuote, osoite, kauppa, voimassa, hinta, promokoodi);
+            ulostuloInput.value = ulostulo.luoUlostulo(tuote, osoite, kauppa, voimassa, hinta, promokoodi, kommentti);
             return;
         }
     }
