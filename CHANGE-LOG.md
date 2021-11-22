@@ -1,4 +1,8 @@
-## Versio 0.9.9 (julkaistu 2020-12-27)
+## Versio 1.0.0 (julkaistu 2021-11-22)
+- Visuaaliseen osioon otsikko
+- Kommentti tarjouksesta -kenttä
+
+## Versio 0.9.9 (julkaistu 2021-01-02)
 - Saksan ALV takaisin 19%
 
 ## Versio 0.9.8 (julkaistu 2020-12-27)
