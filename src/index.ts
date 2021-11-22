@@ -63,11 +63,12 @@ interface UlostuloMaaritykset {
     elementinTekstiId: string;
     elementinKopioNappiId: string;
     luoUlostulo: (tuote: string, osoite: string, kauppa: string, voimassa: string, hinta: string, promokoodi: string) => string;
+    luoOtsikko: (tuote: string, osoite: string, kauppa: string, voimassa: string, hinta: string, promokoodi: string) => string;
 }
 
 const ulostulot: ReadonlyArray<UlostuloMaaritykset> = [
-    { valinta: ValittuUlostulo.BBCode, elementinVanhempiId: "bbcodevanhempi", elementinTekstiId: "bbkoodi", elementinKopioNappiId: "kopioibb", luoUlostulo: generoiBBCode },
-    { valinta: ValittuUlostulo.Markdown, elementinVanhempiId: "markdownvanhempi", elementinTekstiId: "markdownkoodi", elementinKopioNappiId: "kopioimarkdown", luoUlostulo: generoiMarkdown },
+    { valinta: ValittuUlostulo.BBCode, elementinVanhempiId: "bbcodevanhempi", elementinTekstiId: "bbkoodi", elementinKopioNappiId: "kopioibb", luoUlostulo: generoiBBCode, luoOtsikko: generoiOtsikko },
+    { valinta: ValittuUlostulo.Markdown, elementinVanhempiId: "markdownvanhempi", elementinTekstiId: "markdownkoodi", elementinKopioNappiId: "kopioimarkdown", luoUlostulo: generoiMarkdown, luoOtsikko: generoiOtsikko },
 ]
 
 interface KauppojenMaaritykset {
@@ -450,8 +451,15 @@ export function generoi(): void {
 
     laitaUlostulonKopionappiPaalle(valittuUlosTulo);
 
+    const visuaalinenTuoteOtsikko: HTMLElement = document.getElementById('visuaalinentuoteotsikko')!;
+    visuaalinenTuoteOtsikko.innerHTML = generoiOtsikko(turvallinenTarjousTuote, turvallinenTarjousOsoite, kaupanNimi, voimassa, hinta);
+
     const visuaalinen: HTMLElement = document.getElementById('visuaalinen')!;
     visuaalinen.innerHTML = generoiVisuaalinen(turvallinenTarjousTuote, turvallinenTarjousOsoite, kaupanNimi, voimassa, hinta, turvallinenPromokoodi);
+}
+
+export function generoiOtsikko(tuote: string, osoite: string, kauppa: string, voimassa: string, hinta: string): string {
+    return `${tuote}, ${kauppa}, ${hinta}`;
 }
 
 export function generoiBBCode(tuote: string, osoite: string, kauppa: string, voimassa: string, hinta: string, promokoodi: string): string {
