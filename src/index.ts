@@ -28,6 +28,7 @@ enum Verkkokauppa {
     TietokonekauppaDOTfi,
     VeikonKone,
     VerkkokauppaDOTcom,
+    Voidu,
     XXL,
 }
 
@@ -105,6 +106,7 @@ const kaupat: ReadonlyArray<KauppojenMaaritykset> = [
     { kauppa: Verkkokauppa.TietokonekauppaDOTfi, nimi: "Tietokonekauppa.fi", urlit: ["www.tietokonekauppa.fi", "tietokonekauppa.fi"], maa: Maa.Suomi, naytaVeroerolaskuri: false, hintamuokkaus: eiHintamuokkausta, refTarkistus: eiRefTarkistusta},
     { kauppa: Verkkokauppa.VeikonKone, nimi: "Veikon Kone", urlit: ["www.veikonkone.fi", "veikonkone.fi"], maa: Maa.Suomi, naytaVeroerolaskuri: false, hintamuokkaus: eiHintamuokkausta, refTarkistus: eiRefTarkistusta},
     { kauppa: Verkkokauppa.VerkkokauppaDOTcom, nimi: "Verkkokauppa.com", urlit: ["www.verkkokauppa.com", "verkkokauppa.com"], maa: Maa.Suomi, naytaVeroerolaskuri: false, hintamuokkaus: eiHintamuokkausta, refTarkistus: eiRefTarkistusta},
+    { kauppa: Verkkokauppa.Voidu, nimi: "Voidu", urlit: ["www.voidu.com", "voidu.com"], maa: Maa.Suomi, naytaVeroerolaskuri: false, hintamuokkaus: eiHintamuokkausta, refTarkistus: eiRefTarkistusta},
     { kauppa: Verkkokauppa.XXL, nimi: "XXL", urlit: ["www.xxl.fi", "xxl.fi"], maa: Maa.Suomi, naytaVeroerolaskuri: false, hintamuokkaus: eiHintamuokkausta, refTarkistus: eiRefTarkistusta},
 ]
 
