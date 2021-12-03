@@ -1,3 +1,6 @@
+## Versio 1.0.1 (julkaistu 2021-12-03)
+- Kasa pelikauppoja mukaan (mm. Steam ja Voidu)
+
 ## Versio 1.0.0 (julkaistu 2021-11-22)
 - Visuaaliseen osioon otsikko
 - Kommentti tarjouksesta -kenttä
