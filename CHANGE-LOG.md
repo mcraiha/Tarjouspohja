@@ -1,3 +1,6 @@
+## Versio 1.0.2 (julkaistu 2022-01-17)
+- Datatronic mukaan
+
 ## Versio 1.0.1 (julkaistu 2021-12-03)
 - Kasa pelikauppoja mukaan (mm. Steam ja Voidu)
 
