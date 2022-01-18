@@ -2,7 +2,7 @@
 'use strict';
 
 // Välimuistin nimi, versionumeroa kasvatetaan päivityksien yhteydessä
-const PRECACHE = 'v10';
+const PRECACHE = 'v11';
 
 // Lista URL:eista, jotka otetaan aina alussa välimuistiin
 const PRECACHE_URLS = [
