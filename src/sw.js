@@ -1,4 +1,5 @@
 // Service worker
+'use strict';
 
 // Välimuistin nimi, versionumeroa kasvatetaan päivityksien yhteydessä
 const PRECACHE = 'v10';
