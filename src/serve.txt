@@ -1,3 +1,0 @@
-tsc
-cp index.html dist/
-http-server -a localhost -p 8080
