@@ -42,8 +42,8 @@ self.addEventListener('fetch', function(event) {
   event.respondWith(
     caches.match(event.request)
       .then(function(response) {
-        // Löytyy välimuistista
-        if (response) {
+        // Löytyy välimuistista (ja ei ole uudelleenohjaus)
+        if (response && !response.redirected) {
           return response;
         }
 
