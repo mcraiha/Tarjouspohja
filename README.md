@@ -1,10 +1,10 @@
 # Tarjouspohja
 Selaimessa toimiva interaktiivinen HTML5/CSS/Javascript/Typescript -työkalu tarjousviestien generointia varten.
 
-# Osoite
+## Osoite
 [tarjous.raiha.rocks](https://tarjous.raiha.rocks/)
 
-# Kuinka työstän?
+## Kuinka työstän?
 
 Tärkeimmät osat ovat [index.html](src/index.html) - ja [index.ts](src/index.ts) -tiedostot. Jos haluat kääntää index.ts-tiedostosta tarvittavan **index.js**-tiedoston, täytyy sinun ajaa Typescript kääntäjä (`tsc` tai `deno`) src-kansiossa, jolloin index.js generoituu valittuun kansioon.
 
@@ -13,7 +13,7 @@ Koko paketin saa denon kanssa tehtyä ajamalla seuraavan skriptin
 kokokaannos.sh
 ```
 
-# Lisenssi
+## Lisenssi
 
 Koodin lisenssi (*.ts-, *.js- ja *.bash-tiedostot) on **The Unlicense**, katso [LICENSE](https://github.com/mcraiha/Tarjouspohja/blob/master/LICENSE)
 
