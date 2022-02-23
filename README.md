@@ -13,6 +13,18 @@ Koko paketin saa denon kanssa tehtyä ajamalla seuraavan skriptin
 kokokaannos.sh
 ```
 
+## Docker
+
+Jos haluat kääntää koodin ja jaella sitä dockerin kautta omalle selaimellesi, voit käyttää seuraavia komentoja
+```bash
+docker build -t tarjouspohja .
+```
+ja
+```bash
+docker run -p 8088:80 tarjouspohja
+```
+jonka jälkeen voit avata selaimessasi osoitteen [http://localhost:8088](http://localhost:8088)
+
 ## Lisenssi
 
 Koodin lisenssi (*.ts-, *.js- ja *.bash-tiedostot) on **The Unlicense**, katso [LICENSE](https://github.com/mcraiha/Tarjouspohja/blob/master/LICENSE)
