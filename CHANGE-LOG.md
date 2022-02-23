@@ -1,3 +1,6 @@
+## Versio 1.0.3 (julkaistu 2022-02-23)
+- Docker-tuki lisätty (ei muutoksia toimintoihin)
+
 ## Versio 1.0.2 (julkaistu 2022-01-17)
 - Datatronic mukaan
 
