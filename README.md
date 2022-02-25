@@ -32,3 +32,5 @@ Koodin lisenssi (*.ts-, *.js- ja *.bash-tiedostot) on **The Unlicense**, katso [
 CSS-tyylitiedoston ([mvp.css](src/mvp.css)) lisenssi on [MIT-lisenssi](https://fi.wikipedia.org/wiki/MIT-lisenssi)
 
 Ikonitiedostot ([big_icon.png](big_icon.png) ja [favicon.ico](src/favicon.ico)) kuuluvat [CC-BY 4.0](https://creativecommons.org/licenses/by/4.0/) -lisenssin alle, koska ikoni koostuu 💻 - ja 💶 -emojeista, joiden kuvat ovat osa [Twitter Emoji (Twemoji)](https://github.com/twitter/twemoji) -projektia.
+
+Ikonitiedosto ([clipboard-line.svg](src/clipboard-line.svg)) kuuluu [Remix Icon](https://github.com/Remix-Design/remixicon) -pakettiin ja se on [Apache License Version 2.0](https://github.com/Remix-Design/remixicon/blob/master/License) -lisenssin alla.
