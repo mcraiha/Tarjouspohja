@@ -1,3 +1,6 @@
+## Versio 1.0.4 (julkaistu 2022-02-25)
+- Visuaalisen otsikon kopiointi mukaan
+
 ## Versio 1.0.3 (julkaistu 2022-02-23)
 - Docker-tuki lisätty (ei muutoksia toimintoihin)
 
