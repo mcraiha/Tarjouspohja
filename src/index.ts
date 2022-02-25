@@ -480,7 +480,8 @@ export function generoi(): void {
 }
 
 export function generoiOtsikko(tuote: string, osoite: string, kauppa: string, voimassa: string, hinta: string): string {
-    return `${tuote}, ${kauppa}, ${hinta}`;
+    const teksti: string = `${tuote}, ${kauppa}, ${hinta}`;
+    return `${teksti} <a title="Kopioi leikepöydälle" onclick="navigator.clipboard.writeText('${teksti}')"><img src="clipboard-line.svg"></a>`;
 }
 
 export function generoiBBCode(tuote: string, osoite: string, kauppa: string, voimassa: string, hinta: string, promokoodi: string, kommentti: string): string {
