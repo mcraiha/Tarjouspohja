@@ -407,7 +407,7 @@ export function generoi(): void {
         if (onkoVeroerolaskuriKaytossa())
         {
             const luettuHinta: number = parseInt(tarjoushintaInput.value);
-            if (luettuHinta !== NaN) {
+            if (!Number.isNaN(luettuHinta)) {
                 const kohdemaanAlv: HTMLElement = document.getElementById('kohdemaanalv')!;
                 const kohdemaanAlvInput = <HTMLInputElement>kohdemaanAlv;
                 const kohdemaanAlvAvattuna: number = 1 + (parseInt(kohdemaanAlvInput.value) / 100);
