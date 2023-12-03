@@ -1,31 +1,35 @@
 {
-    "name": "Hintatarjouspohjan generoija",
-    "short_name": "Tarjouspohja",
-    "description": "Tarjouspohja - Ilmainen, avoin, mainosvapaa ja yksityisyyttä kunnioittava hintatarjouspohjan generoija",
-    "icons": [
-        {
-          "src": "icons-192.png",
-          "type": "image/png",
-          "sizes": "192x192"
-        },
-        {
-          "src": "icons-512.png",
-          "type": "image/png",
-          "sizes": "512x512"
-        }
-      ],
-    "theme_color": "#5dadec",
-    "background_color": "#ffffff",
-    "display": "standalone",
-    "scope": "/",
-    "start_url": "/",
-    "orientation": "portrait",
-    "categories": ["generator", "deal"],
-    "shortcuts" : [
-      {
-        "name": "Tietoja",
-        "url": "/tietoja.html",
-        "description": "Tietoja"
-      }
-    ]
-  }
+  "name": "Hintatarjouspohjan generoija",
+  "short_name": "Tarjouspohja",
+  "description": "Tarjouspohja - Ilmainen, avoin, mainosvapaa ja yksityisyyttä kunnioittava hintatarjouspohjan generoija",
+  "icons": [
+    {
+      "src": "icons-192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "icons-512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "theme_color": "#5dadec",
+  "background_color": "#ffffff",
+  "display": "standalone",
+  "scope": "/",
+  "start_url": "/",
+  "orientation": "portrait",
+  "categories": [
+    "shopping"
+  ],
+  "shortcuts": [
+    {
+      "name": "Tietoja",
+      "url": "/tietoja.html",
+      "description": "Tietoja"
+    }
+  ],
+  "dir": "auto",
+  "lang": "fi"
+}
